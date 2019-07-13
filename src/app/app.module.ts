@@ -35,12 +35,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { StudentComponent } from './student/student.component';
+import { StudentHelpComponent } from './student-help/student-help.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    StudentComponent,
+    StudentHelpComponent
   ],
   imports: [
     BrowserModule,
