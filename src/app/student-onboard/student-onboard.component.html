@@ -1,0 +1,39 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+<form>
+    <mat-vertical-stepper linear #stepper>
+        <mat-step>
+            <div class="form-container">
+                <ng-template matStepLabel>Continue Your Momentum</ng-template>
+                <p>Please provide your details to continue your application with Experlio</p>
+                <mat-form-field>
+                    <input matInput placeholder="First Name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Personal email address">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Study area">
+                </mat-form-field>
+                <div>
+                    <button type="button" mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <div class="form-container">
+                <ng-template matStepLabel>Let’s Make Sure This Is Right For You</ng-template>
+                <p>The opportunity you’ve applied for requires you to be studying. Please answer the following questions
+                    to qualify for this opportunity.</p>
+                <mat-checkbox>I'm currently studying</mat-checkbox>
+                <mat-form-field>
+                    <input matInput placeholder="University">
+                </mat-form-field>
+                <div>
+                    <button type="button" mat-button matStepperPrevious>Back</button>
+                    <button type="button" mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</form>
