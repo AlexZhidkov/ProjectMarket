@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-onboard.component.css']
 })
 export class BusinessOnboardComponent implements OnInit {
+  isLoading = false;
 
   constructor() { }
 

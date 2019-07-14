@@ -1,1 +1,98 @@
-<p>business-onboard works!</p>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+<form>
+    <mat-vertical-stepper linear #stepper>
+        <mat-step>
+            <div class="form-container">
+                <ng-template matStepLabel>Partner with students to get projects done</ng-template>
+                <p>To gain access to Experlio’s talent pool of students, please provide the following information.</p>
+                <mat-form-field>
+                    <input matInput placeholder="ABN">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Business Name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Supervisor name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Address of your physical premises">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Number of F/T Employees">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Additional Employees">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Are you working with a mentor or tutor?">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Their details">
+                </mat-form-field>
+                <div>
+                    <button type="button" mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <div class="form-container">
+                <ng-template matStepLabel>Get A Tailored Match</ng-template>
+                <p>
+                    So that we can match your business with the right student, we’ve just got a couple more questions.
+                </p>
+                <mat-form-field>
+                    <input matInput placeholder="Website">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Industry">
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput placeholder="In 100 words or less, what makes your business unique?"
+                        rows="5"></textarea>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Start date">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="End date">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Supervisor’s role">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Experience">
+                </mat-form-field>
+
+                <div>
+                    <button type="button" mat-button matStepperPrevious>Back</button>
+                    <button type="button" mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step>
+            <div class="form-container">
+                <ng-template matStepLabel>Why would you like to work with a top student?</ng-template>
+                <mat-checkbox>
+                    To complete a project I can’t afford to employ or dedicate time.
+                </mat-checkbox>
+                <mat-checkbox>
+                    To test whether a student might be a good fit for our organisation to work long term
+                </mat-checkbox>
+                <mat-checkbox>
+                    To gain new ideas
+                </mat-checkbox>
+                <mat-checkbox>
+                    To develop mentors and leaders within my business
+                </mat-checkbox>
+                <mat-form-field>
+                    <textarea matInput placeholder="Other" rows="5"></textarea>
+                </mat-form-field>
+                <div>
+                    <button type="button" mat-button matStepperPrevious>Back</button>
+                    <button type="button" mat-button routerLink="/business">Submit</button>
+                </div>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</form>
