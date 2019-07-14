@@ -10,6 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 })
 export class StudentOnboardComponent implements OnInit {
   isLoading = false;
+  isCurrentlyStudying = false;
   universityControl = new FormControl();
   universities: string[];
   filteredUniversities: Observable<string[]>;
