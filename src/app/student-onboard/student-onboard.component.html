@@ -25,10 +25,21 @@
                 <ng-template matStepLabel>Let’s Make Sure This Is Right For You</ng-template>
                 <p>The opportunity you’ve applied for requires you to be studying. Please answer the following questions
                     to qualify for this opportunity.</p>
-                <mat-checkbox>I'm currently studying</mat-checkbox>
-                <mat-form-field>
-                    <input matInput placeholder="University">
-                </mat-form-field>
+                <mat-checkbox name="isCurrentlyStudying" [(ngModel)]="isCurrentlyStudying">
+                    I'm currently studying
+                </mat-checkbox>
+                <p style="color: red" *ngIf="!isCurrentlyStudying">This is only for students who are studying</p>
+                <div class="form-container" *ngIf="isCurrentlyStudying">
+                    <mat-form-field>
+                        <input type="text" placeholder="University" aria-label="University" matInput
+                            [formControl]="universityControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let university of filteredUniversities | async" [value]="university">
+                                {{university}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Back</button>
                     <button type="button" mat-button matStepperNext>Next</button>

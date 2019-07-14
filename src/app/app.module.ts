@@ -33,6 +33,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { StudentComponent } from './student/student.component';
@@ -84,7 +86,8 @@ import { StudentOnboardComponent } from './student-onboard/student-onboard.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
