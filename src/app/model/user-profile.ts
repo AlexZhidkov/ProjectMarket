@@ -4,10 +4,11 @@ export interface UserProfile extends UserShort {
     fcmToken?: string;
     email: string;
     photoURL: string;
-    university?: string;
-    faculty?: string;
+    roles: Roles;
+}
+
+interface Roles {
+    isAdmin?: boolean;
     isStudent?: boolean;
     isBusiness?: boolean;
-    isUniversity?: boolean;
-    isAdmin?: boolean;
 }

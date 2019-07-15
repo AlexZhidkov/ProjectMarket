@@ -36,7 +36,6 @@ export class AuthService {
     provider.addScope('email');
     return this.afAuth.auth.signInWithPopup(provider)
       .then(credential => {
-        debugger;
         this.updateUser(credential.user);
       });
   }
@@ -50,6 +49,7 @@ export class AuthService {
       displayName: authData.displayName,
       email: authData.email,
       photoURL: authData.photoURL,
+      roles: { isAdmin: true }
     }, { merge: true });
   }
 }
