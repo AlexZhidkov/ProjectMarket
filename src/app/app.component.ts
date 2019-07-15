@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-
-import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { UserProfile } from './model/user-profile';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,27 +14,21 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent {
   title: string;
   homeUrl: string;
-  login: boolean;
+  user: UserProfile;
   photoURL: string;
 
-  constructor(public authService: AuthService,
-              private router: Router,
+  constructor(private authService: AuthService,
               private titleService: Title) {
     this.title = environment.title;
     this.titleService.setTitle(this.title);
     this.homeUrl = environment.homeUrl;
-    this.authService.initialDetails.subscribe(obj => {
-      this.login = obj.isLogin;
-      this.photoURL = obj.photoURL;
-    });
+    authService.user.pipe(map(user => {
+      this.user = user;
+    }))
+      .subscribe();
   }
-
-  isLoggedIn(): boolean {
-    return this.authService.isAuthenticated;
-  }
-
 
   logout() {
-    this.authService.logout();
+    this.authService.signOut();
   }
 }

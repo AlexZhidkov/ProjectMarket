@@ -4,9 +4,9 @@
       <mat-icon>home</mat-icon>
     </button>
     <span class="fill-space"></span>
-    <a *ngIf="!login" style="float: left;" mat-button routerLink="/login">Sign In</a>
-    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="login">
-      <img class="toolbar-photo" src={{photoURL}}>
+    <a *ngIf="!user" style="float: left;" mat-button routerLink="/login">Sign In</a>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user">
+      <img class="toolbar-photo" src={{user.photoURL}}>
     </button>
   </mat-toolbar>
   <mat-menu #menu="matMenu">

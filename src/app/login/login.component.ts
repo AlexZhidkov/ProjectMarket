@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -35,12 +35,12 @@ export class LoginComponent implements OnInit {
 
     switch (provider) {
       case 'facebook': {
-        this.authService.loginWithFacebook()
+        this.authService.googleLogin()
           .then(() => this.redirectAfterLogin());
         break;
       }
       case 'google': {
-        this.authService.loginWithGoogle()
+        this.authService.googleLogin()
           .then(() => this.redirectAfterLogin());
         break;
       }
