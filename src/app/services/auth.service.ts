@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
-import { BehaviorSubject, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { UserProfile } from '../model/user-profile';
 
 @Injectable({
@@ -11,12 +11,12 @@ import { UserProfile } from '../model/user-profile';
 })
 export class AuthService {
 
-  user: BehaviorSubject<UserProfile> = new BehaviorSubject(null);
+  user: Observable<UserProfile>;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore) {
 
-    this.afAuth.authState.pipe(
+    this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           /// signed in
@@ -25,10 +25,7 @@ export class AuthService {
           /// not signed in
           return of(null);
         }
-      }))
-      .subscribe(user => {
-        this.user.next(user);
-      });
+      }));
   }
 
   googleLogin() {
@@ -38,6 +35,12 @@ export class AuthService {
       .then(credential => {
         this.updateUser(credential.user);
       });
+  }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.user.pipe(
+      map(user => !!user)
+    );
   }
 
   signOut() {

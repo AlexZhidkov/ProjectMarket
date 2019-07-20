@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
   }
 
   redirectAfterLogin() {
-    const redirectAfterLoginPath = this.userPrimaryRole ? this.userPrimaryRole : '/';
+    const authReturnUrl = localStorage.getItem('authReturnUrl');
+    localStorage.removeItem('authReturnUrl');
+    const redirectAfterLoginPath = authReturnUrl ? authReturnUrl : '/';
     this.router.navigate([redirectAfterLoginPath]);
   }
 }
