@@ -4,15 +4,15 @@
         <mat-card-subtitle>Sign in with the account of your preference</mat-card-subtitle>
     </mat-card-header>
 
-    <button mat-raised-button class="block-button" (click)="login('Facebook')">
+    <button mat-raised-button class="block-button" (click)="login(provider.facebook)">
         <img alt="Facebook Logo" src="assets/icons/auth_service_facebook.svg" />
         <span> Facebook </span>
     </button>
-    <button mat-raised-button class="block-button" (click)="login('Google')">
+    <button mat-raised-button class="block-button" (click)="login(provider.google)">
         <img alt="Google Logo" src="assets/icons/auth_service_google.svg" />
         <span> Google </span>
     </button>
-    <button mat-raised-button class="block-button" (click)="login('Microsoft')">
+    <button mat-raised-button class="block-button" (click)="login(provider.microsoft)">
         <img alt="Microsoft Logo" src="assets/icons/auth_service_mslive.svg" />
         <span> Microsoft </span>
     </button>

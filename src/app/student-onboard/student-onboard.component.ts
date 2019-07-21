@@ -31,6 +31,11 @@ export class StudentOnboardComponent implements OnInit {
     this.userDoc = this.afs.doc<UserProfile>('users/' + this.uid);
     this.bindFormControls();
   }
+
+  submit() {
+
+  }
+
   bindFormControls() {
     this.user = this.userDoc.valueChanges();
     this.user.subscribe(r => {

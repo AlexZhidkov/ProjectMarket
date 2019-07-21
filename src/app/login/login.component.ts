@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   userPrimaryRole: string;
+  provider = SignInProvider;
 
   constructor(public authService: AuthService,
               private router: Router) { }
