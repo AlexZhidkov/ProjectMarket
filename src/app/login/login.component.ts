@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SignInProvider } from '../model/signInProviders';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,43 +9,16 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  faculties: string[];
-  faculty: string;
   userPrimaryRole: string;
-  showUserPrimaryRoleSelector: boolean;
-  studentUniversity: string;
 
   constructor(public authService: AuthService,
               private router: Router) { }
 
-  ngOnInit() {
-    this.userPrimaryRole = localStorage.getItem('userPrimaryRole');
-    this.studentUniversity = localStorage.getItem('university');
-    this.faculty = localStorage.getItem('faculty');
-    this.showUserPrimaryRoleSelector = !Boolean(this.userPrimaryRole);
-  }
+  ngOnInit() { }
 
-  updateUserPrimaryRole(role: string) {
-    localStorage.setItem('userPrimaryRole', role);
-  }
-
-  login(provider: string) {
-    localStorage.setItem('university', this.studentUniversity);
-    localStorage.setItem('userPrimaryRole', this.userPrimaryRole);
-    localStorage.setItem('faculty', this.faculty);
-
-    switch (provider) {
-      case 'facebook': {
-        this.authService.googleLogin()
-          .then(() => this.redirectAfterLogin());
-        break;
-      }
-      case 'google': {
-        this.authService.googleLogin()
-          .then(() => this.redirectAfterLogin());
-        break;
-      }
-    }
+  login(provider: SignInProvider) {
+    this.authService.login(provider)
+      .then(() => this.redirectAfterLogin());
   }
 
   redirectAfterLogin() {

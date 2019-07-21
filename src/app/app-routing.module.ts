@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'student', component: StudentComponent },
   { path: 'student/form', component: StudentOnboardComponent },
-  { path: 'student/signup', component: StudentOnboardComponent, canActivate: [AuthGuard] },
+  { path: 'student/signup', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
   { path: 'business', component: BusinessComponent },
   { path: 'business/form', component: BusinessOnboardComponent },
   { path: '**', component: HomeComponent }

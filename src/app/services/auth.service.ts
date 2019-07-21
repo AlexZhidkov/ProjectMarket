@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { SignInProvider } from '../model/signInProviders';
 import { UserProfile } from '../model/user-profile';
 
 @Injectable({
@@ -28,9 +29,18 @@ export class AuthService {
       }));
   }
 
-  googleLogin() {
-    const provider = new auth.GoogleAuthProvider();
-    provider.addScope('email');
+  login(providerName: SignInProvider) {
+    let provider: auth.GoogleAuthProvider;
+    switch (providerName) {
+      case SignInProvider.google:
+        provider = new auth.GoogleAuthProvider();
+        provider.addScope('email');
+        break;
+      case SignInProvider.facebook:
+        provider = new auth.FacebookAuthProvider();
+        provider.addScope('email');
+        break;
+    }
     return this.afAuth.auth.signInWithPopup(provider)
       .then(credential => {
         this.updateUser(credential.user);
@@ -48,11 +58,17 @@ export class AuthService {
   }
 
   private updateUser(authData) {
-    const userDoc = this.afs.doc<UserProfile>('users/' + authData.uid).set({
+    const user: UserProfile = {
       displayName: authData.displayName,
       email: authData.email,
       photoURL: authData.photoURL,
-      roles: { isAdmin: true }
-    }, { merge: true });
+      roles: {}
+    };
+    switch (localStorage.getItem('userPrimaryRole')) {
+      case 'Student':
+        user.roles.isStudent = true;
+        break;
+    }
+    const userDoc = this.afs.doc<UserProfile>('users/' + authData.uid).set(user, { merge: true });
   }
 }

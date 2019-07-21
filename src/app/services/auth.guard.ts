@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
       tap(isAuthenticated => {
         if (!isAuthenticated) {
           localStorage.setItem('authReturnUrl', state.url);
+          localStorage.setItem('userPrimaryRole', next.data.role);
           this.router.navigate(['/login']);
         }
       }));
