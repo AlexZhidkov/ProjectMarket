@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { UserProfile } from '../model/user-profile';
 
 @Component({
   selector: 'app-student-onboard',
@@ -9,15 +11,65 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./student-onboard.component.css']
 })
 export class StudentOnboardComponent implements OnInit {
-  isLoading = false;
-  isCurrentlyStudying = false;
-  universityControl = new FormControl();
+  isLoading = true;
+  uid: string;
+  userDoc: AngularFirestoreDocument<UserProfile>;
+  user: Observable<UserProfile>;
+  personalFormGroup: FormGroup;
+  studyFormGroup: FormGroup;
+  resumeFormGroup: FormGroup;
   universities: string[];
   filteredUniversities: Observable<string[]>;
 
-  constructor() { }
+  constructor(
+    private afs: AngularFirestore,
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.uid = localStorage.getItem('uid');
+    this.userDoc = this.afs.doc<UserProfile>('users/' + this.uid);
+    this.bindFormControls();
+  }
+  bindFormControls() {
+    this.user = this.userDoc.valueChanges();
+    this.user.subscribe(r => {
+      if (!r.student) {
+        r.student = {
+          studyArea: null,
+          isStudying: false,
+          university: null,
+          year: null,
+          course: null,
+          interests: null,
+          why: null,
+          resumeUrl: null,
+          transcriptUrl: null
+        };
+      }
+      this.personalFormGroup = this.formBuilder.group({
+        nameCtrl: [r.name, Validators.required],
+        emailCtrl: [r.email, Validators.required],
+        studyAreaCtrl: [r.student.studyArea]
+      });
+      this.studyFormGroup = this.formBuilder.group({
+        isStudyingCtrl: [r.student.isStudying],
+        universityCtrl: [r.student.university],
+        yearCtrl: [r.student.year],
+        courseCtrl: [r.student.course]
+      });
+      this.resumeFormGroup = this.formBuilder.group({
+        interestsCtrl: [r.student.interests],
+        whyCtrl: [r.student.why],
+        resumeUrlCtrl: [r.student.resumeUrl],
+        transcriptUrlCtrl: [r.student.transcriptUrl]
+      });
+      this.buildUniversityControl();
+      this.isLoading = false;
+    });
+  }
+
+  buildUniversityControl() {
     this.universities = [
       'Curtin University',
       'Edith Cowan University',
@@ -68,7 +120,7 @@ export class StudentOnboardComponent implements OnInit {
       'Western Sydney University',
     ];
 
-    this.filteredUniversities = this.universityControl.valueChanges
+    this.filteredUniversities = this.studyFormGroup.get('universityCtrl').valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
@@ -77,7 +129,6 @@ export class StudentOnboardComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.universities.filter(option => option.toLowerCase().includes(filterValue));
   }
 }

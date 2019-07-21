@@ -1,58 +1,66 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-<form>
-    <mat-vertical-stepper linear #stepper>
-        <mat-step>
+<mat-vertical-stepper *ngIf="!isLoading" linear #stepper>
+    <mat-step [stepControl]="personalFormGroup">
+        <form [formGroup]="personalFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>Continue Your Momentum</ng-template>
                 <p>Please provide your details to continue your application with Experlio</p>
                 <mat-form-field>
-                    <input matInput placeholder="First Name">
+                    <input matInput placeholder="Preferred name" formControlName="nameCtrl" required
+                        (ngModelChange)="userDoc.update({name: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Personal email address">
+                    <input matInput placeholder="Personal email address" formControlName="emailCtrl" required
+                        (ngModelChange)="userDoc.update({email: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Study area">
+                    <input matInput placeholder="Study area" formControlName="studyAreaCtrl"
+                        (ngModelChange)="userDoc.set({student: { studyArea: $event}}, { merge: true })">
                 </mat-form-field>
                 <div>
                     <button type="button" mat-button matStepperNext>Next</button>
                 </div>
             </div>
-        </mat-step>
-        <mat-step>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="studyFormGroup">
+        <form [formGroup]="studyFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>Let’s Make Sure This Is Right For You</ng-template>
                 <p>The opportunity you’ve applied for requires you to be studying. Please answer the following questions
                     to qualify for this opportunity.</p>
-                <mat-checkbox name="isCurrentlyStudying" [(ngModel)]="isCurrentlyStudying">
+                <mat-checkbox formControlName="isStudyingCtrl"
+                    (ngModelChange)="userDoc.set({student: { isStudying: $event}}, { merge: true })">
                     I'm currently studying
                 </mat-checkbox>
-                <p style="color: red" *ngIf="!isCurrentlyStudying">This is only for students who are studying</p>
-                <div class="form-container" *ngIf="isCurrentlyStudying">
-                    <mat-form-field>
-                        <input type="text" placeholder="University" aria-label="University" matInput
-                            [formControl]="universityControl" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let university of filteredUniversities | async" [value]="university">
-                                {{university}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="What year of study are you in?">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="What course are you studying?">
-                    </mat-form-field>
-                </div>
+                <mat-form-field>
+                    <input type="text" placeholder="University" aria-label="University" matInput
+                        formControlName="universityCtrl" [matAutocomplete]="auto"
+                        (ngModelChange)="userDoc.set({student: { university: $event}}, { merge: true })">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let university of filteredUniversities | async" [value]="university">
+                            {{university}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="What year of study are you in?" formControlName="yearCtrl"
+                        (ngModelChange)="userDoc.set({student: { year: $event}}, { merge: true })">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="What course are you studying?" formControlName="courseCtrl"
+                        (ngModelChange)="userDoc.set({student: { course: $event}}, { merge: true })">
+                </mat-form-field>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Back</button>
                     <button type="button" mat-button matStepperNext>Next</button>
                 </div>
             </div>
-        </mat-step>
-        <mat-step>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="resumeFormGroup">
+        <form [formGroup]="resumeFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>We want to help you find the best experience for you!</ng-template>
                 <p>
@@ -60,31 +68,46 @@
                     expected to have much (or any) experience. Answer the following questions to help us, help you.
                 </p>
                 <mat-form-field>
-                    <input matInput placeholder="What interests you outside of your studies?">
+                    <input matInput placeholder="What interests you outside of your studies?"
+                        formControlName="interestsCtrl"
+                        (ngModelChange)="userDoc.set({student: { interests: $event}}, { merge: true })">
                 </mat-form-field>
                 <mat-form-field>
                     <textarea matInput rows="5"
-                        placeholder="In 100 words or less, why do you want to take up this opportunity? And why do you believe you’ll be a good fit?"></textarea>
+                        placeholder="In 100 words or less, why do you want to take up this opportunity? And why do you believe you’ll be a good fit?"
+                        formControlName="whyCtrl"
+                        (ngModelChange)="userDoc.set({student: { why: $event}}, { merge: true })"></textarea>
                 </mat-form-field>
                 <p>
-                    Please upload your resume and your transcript
+                    Please provide links to your shared resume and transcript
                     (we only use these documents to verify that what you have said is accurate, we don’t use them to
                     grade you)
                 </p>
-                <button type="button" mat-button>Select file</button>
-                <mat-checkbox #check1>
+                <mat-form-field>
+                    <input matInput placeholder="Resume URL" formControlName="resumeUrlCtrl"
+                        (ngModelChange)="userDoc.set({student: { resumeUrl: $event}}, { merge: true })">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Transcript URL" formControlName="transcriptUrlCtrl"
+                        (ngModelChange)="userDoc.set({student: { transcriptUrl: $event}}, { merge: true })">
+                </mat-form-field>
+
+                <p>
+                    <mat-checkbox #check1> </mat-checkbox>
                     I understand that I need to check my emails regularly,
                     because the Practicum Coordinator may send me project offerings.
-                </mat-checkbox>
-                <mat-checkbox #check2>
+                </p>
+                <p>
+                    <mat-checkbox #check2> </mat-checkbox>
                     I understand that by completing this form a project is not guaranteed.
                     I am however expressing my interest to be considered for a project.
-                </mat-checkbox>
+                </p>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Back</button>
-                    <button type="button" mat-button routerLink="/student">Submit</button>
+                    <button type="button" mat-button [disabled]="!(check1.checked && check2.checked)"
+                        (click)="submit()">Submit</button>
                 </div>
             </div>
-        </mat-step>
-    </mat-vertical-stepper>
-</form>
+        </form>
+    </mat-step>
+</mat-vertical-stepper>

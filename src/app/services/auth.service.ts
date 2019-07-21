@@ -21,9 +21,11 @@ export class AuthService {
       switchMap(user => {
         if (user) {
           /// signed in
+          localStorage.setItem('uid', user.uid);
           return this.afs.doc('users/' + user.uid).valueChanges();
         } else {
           /// not signed in
+          localStorage.removeItem('uid');
           return of(null);
         }
       }));
@@ -54,13 +56,16 @@ export class AuthService {
   }
 
   signOut() {
+    localStorage.removeItem('uid');
     this.afAuth.auth.signOut();
   }
 
   private updateUser(authData) {
     const user: UserProfile = {
-      displayName: authData.displayName,
+      name: authData.displayName,
+      authName: authData.displayName,
       email: authData.email,
+      authEmail: authData.email,
       photoURL: authData.photoURL,
       roles: {}
     };
