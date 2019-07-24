@@ -33,7 +33,7 @@ export class StudentOnboardComponent implements OnInit {
   }
 
   submit() {
-
+    console.log('submit');
   }
 
   bindFormControls() {

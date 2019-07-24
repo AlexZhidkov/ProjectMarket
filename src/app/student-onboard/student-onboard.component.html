@@ -104,8 +104,8 @@
                 </p>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Back</button>
-                    <button type="button" mat-button [disabled]="!(check1.checked && check2.checked)"
-                        (click)="submit()">Submit</button>
+                    <button type="button" mat-button [disabled]="!(check1.checked && check2.checked)" (click)="submit()"
+                        routerLink="/student/form/confirmation">Submit</button>
                 </div>
             </div>
         </form>
