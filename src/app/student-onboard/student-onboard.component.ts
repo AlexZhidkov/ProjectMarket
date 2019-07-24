@@ -51,6 +51,7 @@ export class StudentOnboardComponent implements OnInit {
   bindFormControls() {
     this.user = this.userDoc.valueChanges();
     this.user.subscribe(r => {
+      if (!r) { return; }
       if (!r.student) {
         r.student = {
           studyArea: null,
