@@ -33,7 +33,19 @@ export class StudentOnboardComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit');
+    this.userDoc.get()
+      .subscribe(studentSnapshot => {
+        const user = studentSnapshot.data() as UserProfile;
+        user.id = studentSnapshot.id;
+        const event = {
+          created: new Date(),
+          title: 'Student submitted form',
+          user
+        };
+
+        this.afs.collection('events').add(event);
+        this.afs.collection('students').doc(user.id).set(user);
+      });
   }
 
   bindFormControls() {
