@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   login(providerName: SignInProvider) {
-    let provider: auth.GoogleAuthProvider;
+    let provider: any;
     switch (providerName) {
       case SignInProvider.google:
         provider = new auth.GoogleAuthProvider();
@@ -41,6 +41,9 @@ export class AuthService {
       case SignInProvider.facebook:
         provider = new auth.FacebookAuthProvider();
         provider.addScope('email');
+        break;
+      case SignInProvider.microsoft:
+        provider = new auth.OAuthProvider('microsoft.com');
         break;
     }
     return this.afAuth.auth.signInWithPopup(provider)
