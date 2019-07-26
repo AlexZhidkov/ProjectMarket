@@ -13,6 +13,7 @@ import { StudentComponent } from './student/student.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'profile', component: StudentComponent },
   { path: 'student', component: StudentComponent },
   { path: 'student/form', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
   { path: 'student/form/confirmation', component: StudentConfirmationScreenComponent },

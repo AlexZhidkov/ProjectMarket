@@ -28,6 +28,10 @@ export class AppComponent {
       .subscribe();
   }
 
+  navigateHome() {
+    window.location.href = this.homeUrl;
+  }
+
   logout() {
     this.authService.signOut();
   }

@@ -1,8 +1,9 @@
 <div class="center-div">
   <mat-toolbar color="primary">
-    <button mat-button routerLink="/">
+    <button mat-button (click)='navigateHome()'>
       <mat-icon>home</mat-icon>
     </button>
+    {{title}}
     <span class="fill-space"></span>
     <a *ngIf="!user" style="float: left;" mat-button routerLink="/login">Sign In</a>
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user">
