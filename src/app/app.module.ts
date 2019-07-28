@@ -44,6 +44,10 @@ import { StudentComponent } from './student/student.component';
 import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
 import { ReferrerComponent } from './referrer/referrer.component';
 import { AdminComponent } from './admin/admin.component';
+import { BusinessesComponent } from './businesses/businesses.component';
+import { StudentsComponent } from './students/students.component';
+import { BusinessViewComponent } from './business-view/business-view.component';
+import { StudentViewComponent } from './student-view/student-view.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,11 @@ import { AdminComponent } from './admin/admin.component';
     BusinessOnboardComponent,
     StudentConfirmationScreenComponent,
     ReferrerComponent,
-    AdminComponent
+    AdminComponent,
+    BusinessesComponent,
+    StudentsComponent,
+    BusinessViewComponent,
+    StudentViewComponent
   ],
   imports: [
     BrowserModule,

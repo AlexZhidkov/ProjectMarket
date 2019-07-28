@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Registered Students
+        </mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-nav-list>
+        <mat-list-item *ngFor="let student of students | async" routerLink="/student/{{student.id}}">
+            <img matListAvatar src={{student.photoURL}}>
+            <h3 matLine> {{student.name}} </h3>
+            <p matLine> {{student.email}} </p>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-card>
