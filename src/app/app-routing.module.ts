@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'student/signup', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
   { path: 'business', component: BusinessComponent },
   { path: 'business/form', component: BusinessOnboardComponent },
-  { path: 'referrer', component: ReferrerComponent },
+  { path: 'business/form/:id', component: BusinessOnboardComponent },
+  { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'admin', component: AdminComponent },
   { path: '**', component: HomeComponent }
 ];

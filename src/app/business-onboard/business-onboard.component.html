@@ -1,67 +1,88 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-<form>
-    <mat-vertical-stepper linear #stepper>
-        <mat-step>
+<mat-vertical-stepper *ngIf="!isLoading" linear #stepper>
+    <mat-step [stepControl]="businessFormGroup">
+        <form [formGroup]="businessFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>Partner with students to get projects done</ng-template>
-                <p>To gain access to Experlio’s talent pool of students, please provide the following information.</p>
+                <p>To gain access to Experlio`s talent pool of students, please provide the following information.</p>
                 <mat-form-field>
-                    <input matInput placeholder="ABN">
+                    <input matInput placeholder="ABN" formControlName="abn"
+                        (ngModelChange)="businessDoc.update({abn: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Business Name">
+                    <input matInput placeholder="Business Name" formControlName="name" required
+                        (ngModelChange)="businessDoc.update({name: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Supervisor name">
+                    <input matInput placeholder="Supervisor name" formControlName="supervisor"
+                        (ngModelChange)="businessDoc.update({supervisor: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Address of your physical premises">
+                    <input matInput placeholder="Address of your physical premises" formControlName="address" required
+                        (ngModelChange)="businessDoc.update({address: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Number of F/T Employees">
+                    <input matInput placeholder="Number of F/T Employees" formControlName="fteNumber"
+                        (ngModelChange)="businessDoc.update({fteNumber: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Additional Employees">
+                    <input matInput placeholder="Additional Employees" formControlName="additionalEmployees"
+                        (ngModelChange)="businessDoc.update({additionalEmployees: $event})">
                 </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Are you working with a mentor or tutor?">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Their details">
+                <mat-checkbox formControlName="isMentorAvailable"
+                    (ngModelChange)="businessDoc.update({isMentorAvailable: $event})">
+                    Are you working with a mentor or tutor?
+                </mat-checkbox>
+                <mat-form-field *ngIf="businessFormGroup.get('isMentorAvailable').value">
+                    <input matInput placeholder="Their details" formControlName="mentor"
+                        (ngModelChange)="businessDoc.update({mentor: $event})">
                 </mat-form-field>
                 <div>
                     <button type="button" mat-button matStepperNext>Next</button>
                 </div>
             </div>
-        </mat-step>
-        <mat-step>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="extraFormGroup">
+        <form [formGroup]="extraFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>Get A Tailored Match</ng-template>
                 <p>
                     So that we can match your business with the right student, we’ve just got a couple more questions.
                 </p>
                 <mat-form-field>
-                    <input matInput placeholder="Website">
+                    <input matInput placeholder="Website" formControlName="website"
+                        (ngModelChange)="businessDoc.update({website: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Industry">
+                    <input matInput placeholder="Industry" formControlName="industry"
+                        (ngModelChange)="businessDoc.update({industry: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea matInput placeholder="In 100 words or less, what makes your business unique?"
-                        rows="5"></textarea>
+                    <textarea matInput placeholder="In 100 words or less, what makes your business unique?" rows="5"
+                        formControlName="description"
+                        (ngModelChange)="businessDoc.update({description: $event})"></textarea>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Start date">
+                    <input matInput [matDatepicker]="picker" placeholder="Start Date" formControlName="startDate"
+                        (dateChange)="businessDoc.update({startDate: $event.value})">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="End date">
+                    <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate"
+                        (dateChange)="businessDoc.update({endDate: $event.value})">
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Supervisor’s role">
+                    <input matInput placeholder="Supervisor’s role" formControlName="supervisorRole"
+                        (ngModelChange)="businessDoc.update({supervisorRole: $event})">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Experience">
+                    <input matInput placeholder="Experience" formControlName="supervisorExperience"
+                        (ngModelChange)="businessDoc.update({supervisorExperience: $event})">
                 </mat-form-field>
 
                 <div>
@@ -69,30 +90,37 @@
                     <button type="button" mat-button matStepperNext>Next</button>
                 </div>
             </div>
-        </mat-step>
-        <mat-step>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="whyFormGroup">
+        <form [formGroup]="whyFormGroup">
             <div class="form-container">
                 <ng-template matStepLabel>Why would you like to work with a top student?</ng-template>
-                <mat-checkbox>
+                <mat-checkbox formControlName="completeProject"
+                    (ngModelChange)="businessDoc.set({why: {completeProject: $event}}, { merge: true })">
                     To complete a project I can’t afford to employ or dedicate time.
                 </mat-checkbox>
-                <mat-checkbox>
+                <mat-checkbox formControlName="testStudent"
+                    (ngModelChange)="businessDoc.set({why: {testStudent: $event}}, { merge: true })">
                     To test whether a student might be a good fit for our organisation to work long term
                 </mat-checkbox>
-                <mat-checkbox>
+                <mat-checkbox formControlName="gainIdeas"
+                    (ngModelChange)="businessDoc.set({why: {gainIdeas: $event}}, { merge: true })">
                     To gain new ideas
                 </mat-checkbox>
-                <mat-checkbox>
+                <mat-checkbox formControlName="developMentors"
+                    (ngModelChange)="businessDoc.set({why: {developMentors: $event}}, { merge: true })">
                     To develop mentors and leaders within my business
                 </mat-checkbox>
                 <mat-form-field>
-                    <textarea matInput placeholder="Other" rows="5"></textarea>
+                    <textarea matInput placeholder="Other" rows="5" formControlName="other"
+                        (ngModelChange)="businessDoc.set({why: {other: $event}}, { merge: true })"></textarea>
                 </mat-form-field>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Back</button>
                     <button type="button" mat-button routerLink="/business">Submit</button>
                 </div>
             </div>
-        </mat-step>
-    </mat-vertical-stepper>
-</form>
+        </form>
+    </mat-step>
+</mat-vertical-stepper>

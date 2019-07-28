@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   title: 'ProjectMarket',
-  homeUrl: 'https://github.com/AlexZhidkov/ProjectMarket',
+  homeUrl: '/',
   firebase: {
     apiKey: 'AIzaSyAldp-FdQtjtDwakR3zR0thnd-c6k0sSfQ',
     authDomain: 'project-market-dev.firebaseapp.com',
