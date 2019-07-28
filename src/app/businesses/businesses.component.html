@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Registered Businesses
+        </mat-card-title>
+    </mat-card-header>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-nav-list>
+        <mat-list-item *ngFor="let business of businesses | async" routerLink="/business/{{business.id}}">
+            <h3 matLine> {{business.name}} </h3>
+            <p matLine> {{business.createdBy.name}} </p>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-card>
