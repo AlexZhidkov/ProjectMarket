@@ -22,6 +22,7 @@ export class AuthService {
         if (user) {
           /// signed in
           localStorage.setItem('uid', user.uid);
+          localStorage.setItem('userName', user.displayName);
           return this.afs.doc('users/' + user.uid).valueChanges();
         } else {
           /// not signed in

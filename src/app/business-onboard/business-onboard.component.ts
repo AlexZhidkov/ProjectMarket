@@ -30,9 +30,13 @@ export class BusinessOnboardComponent implements OnInit {
       this.bindFormControls();
     } else {
       this.businessId = this.afs.createId();
-      const uid = localStorage.getItem('uid');
-      this.afs.collection('businesses').doc(this.businessId).set({ why: {}, createdBy: uid })
-        .then(_ => this.bindFormControls());
+      this.afs.collection('businesses').doc(this.businessId).set({
+        why: {},
+        createdBy: {
+          uid: localStorage.getItem('uid'),
+          name: localStorage.getItem('userName')
+        }
+      }).then(_ => this.bindFormControls());
     }
   }
 
