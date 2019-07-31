@@ -49,6 +49,29 @@ exports.sendEmail = functions.firestore
     });
 
 /**
+ * Sends an email to each new student onboarding form submission.
+ */
+exports.sendEmail = functions.firestore
+    .document('students/{id}')
+    .onCreate((snap, context) => {
+        const student = snap.data();
+        const emailText =
+            'Hi ' + student.name + ', \n \n' +
+            'Thanks for signing up to ' + APP_NAME + '. We`re excited to help partner you with small and medium businesses that have exciting real-world projects for you to take on. \n \n' +
+            'Part of what happens next requires us to make sure you are eligible for these projects. If you answered the questions on our application form truthfully, we should be able to tell almost immediately, however, we may need to follow up to gain a further understanding. Please keep an eye out for our emails. \n \n' +
+            'To give you an idea if you qualify, generally speaking, if you are a current student at university and have completed your first year of studies, you should be eligible. If not, these opportunities may not be the right fit for you. \n \n' +
+            'We wish you all the best. \n \n' +
+            APP_NAME
+        const email = {
+            to: student.email,
+            subject: 'Thanks for filling out our form!',
+            text: emailText
+        }
+        return sendNotificationEmail(email);
+    });
+
+
+/**
  * Sends an email for each new document in firestore collection.
  */
 exports.sendEventViaEmail = functions.firestore
