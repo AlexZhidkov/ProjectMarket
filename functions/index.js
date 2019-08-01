@@ -64,7 +64,7 @@ exports.sendEmail = functions.firestore
             APP_NAME
         const email = {
             to: student.email,
-            subject: 'Thanks for filling out our form!',
+            subject: 'Your ' + APP_NAME + ' Application',
             text: emailText
         }
         return sendNotificationEmail(email);
