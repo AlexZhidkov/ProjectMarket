@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,6 +21,7 @@ export class BusinessOnboardComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder
   ) { }
 
@@ -76,4 +77,22 @@ export class BusinessOnboardComponent implements OnInit {
     });
   }
 
+  submit() {
+    this.businessDoc.update({ submittedOn: new Date() }).then(() => {
+      this.businessDoc.get()
+        .subscribe(businessSnapshot => {
+          const business = businessSnapshot.data();
+          business.id = businessSnapshot.id;
+          const event = {
+            created: new Date(),
+            title: 'Business submitted form',
+            business
+          };
+
+          this.afs.collection('events').add(event);
+        });
+    });
+    this.router.navigateByUrl('/referrer');
+
+  }
 }
