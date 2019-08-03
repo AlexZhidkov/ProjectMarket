@@ -4,6 +4,12 @@
         <mat-card-title>Referrer Dashboard</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let business of draftBusinesses | async" routerLink="/business/{{business.id}}">
+                <h3 matLine> {{business.name}} </h3>
+            </mat-list-item>
+        </mat-nav-list>
         <button mat-raised-button routerLink="/business/form">Create New Business</button>
         <button mat-raised-button routerLink="/businesses">Open List of Businesses</button>
     </mat-card-content>

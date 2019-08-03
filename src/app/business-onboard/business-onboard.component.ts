@@ -35,7 +35,8 @@ export class BusinessOnboardComponent implements OnInit {
         createdBy: {
           uid: localStorage.getItem('uid'),
           name: localStorage.getItem('userName')
-        }
+        },
+        submittedOn: null
       }).then(_ => this.bindFormControls());
     }
   }

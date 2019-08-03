@@ -32,6 +32,10 @@ export class AuthService {
       }));
   }
 
+  currentUser() {
+    return this.afAuth.auth.currentUser;
+  }
+
   login(providerName: SignInProvider) {
     let provider: any;
     switch (providerName) {
