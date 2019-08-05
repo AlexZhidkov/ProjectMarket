@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppEvent } from '../model/app-event';
 
 @Component({
   selector: 'app-business-onboard',
@@ -83,10 +84,14 @@ export class BusinessOnboardComponent implements OnInit {
         .subscribe(businessSnapshot => {
           const business = businessSnapshot.data();
           business.id = businessSnapshot.id;
-          const event = {
+          const event: AppEvent = {
             created: new Date(),
             title: 'Business submitted form',
-            business
+            data: business,
+            user: {
+              uid: localStorage.getItem('uid'),
+              name: localStorage.getItem('userName')
+            }
           };
 
           this.afs.collection('events').add(event);

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { AppEvent } from '../model/app-event';
 import { UserProfile } from '../model/user-profile';
 
 @Component({
@@ -35,16 +36,20 @@ export class StudentOnboardComponent implements OnInit {
   submit() {
     this.userDoc.get()
       .subscribe(studentSnapshot => {
-        const user = studentSnapshot.data() as UserProfile;
-        user.id = studentSnapshot.id;
-        const event = {
+        const student = studentSnapshot.data() as UserProfile;
+        student.id = studentSnapshot.id;
+        const event: AppEvent = {
           created: new Date(),
           title: 'Student submitted form',
-          user
+          data: student,
+          user: {
+            uid: localStorage.getItem('uid'),
+            name: localStorage.getItem('userName')
+          }
         };
 
         this.afs.collection('events').add(event);
-        this.afs.collection('students').doc(user.id).set(user);
+        this.afs.collection('students').doc(student.id).set(student);
       });
   }
 

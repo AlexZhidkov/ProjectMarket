@@ -80,7 +80,7 @@ exports.sendEventViaEmail = functions.firestore
         const event = snap.data();
         const email = {
             to: emailReceiver,
-            subject: event.title + ' ' + event.user.authName,
+            subject: event.title + ' ' + event.user.name,
             text: JSON.stringify(event, null, 2)
         }
         return sendNotificationEmail(email);
