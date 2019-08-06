@@ -5,6 +5,7 @@ import { BusinessOnboardComponent } from './business-onboard/business-onboard.co
 import { BusinessViewComponent } from './business-view/business-view.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessesComponent } from './businesses/businesses.component';
+import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReferrerComponent } from './referrer/referrer.component';
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: 'business/form/:id', component: BusinessOnboardComponent },
   { path: 'business/:id', component: BusinessViewComponent },
   { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
+  { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'admin', component: AdminComponent },
+  { path: 'events', component: EventsViewerComponent },
   { path: '**', component: HomeComponent }
 ];
 
