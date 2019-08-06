@@ -38,6 +38,7 @@ export class BusinessOnboardComponent implements OnInit {
           uid: localStorage.getItem('uid'),
           name: localStorage.getItem('userName')
         },
+        isSubmitted: false,
         submittedOn: null
       }).then(_ => this.bindFormControls());
     }
@@ -79,7 +80,7 @@ export class BusinessOnboardComponent implements OnInit {
   }
 
   submit() {
-    this.businessDoc.update({ submittedOn: new Date() }).then(() => {
+    this.businessDoc.update({ isSubmitted: true, submittedOn: new Date() }).then(() => {
       this.businessDoc.get()
         .subscribe(businessSnapshot => {
           const business = businessSnapshot.data();

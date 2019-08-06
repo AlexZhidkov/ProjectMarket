@@ -14,7 +14,7 @@ export class BusinessesComponent implements OnInit {
   constructor(private firestore: FirestoreService<any>) { }
 
   ngOnInit() {
-    this.firestore.setCollection('businesses');
+    this.firestore.setCollection('businesses', ref => ref.where('isSubmitted', '==', true));
     this.businesses = this.firestore.list();
     this.businesses.subscribe(e => {
       this.isLoading = false;
