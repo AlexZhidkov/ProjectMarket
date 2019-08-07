@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Business } from '../model/business';
 import { FirestoreService } from '../services/firestore.service';
 
 @Component({
@@ -10,9 +11,9 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class BusinessesComponent implements OnInit {
   isLoading = true;
-  businesses: Observable<any[]>;
+  businesses: Observable<Business[]>;
 
-  constructor(private route: ActivatedRoute, private firestore: FirestoreService<any>) { }
+  constructor(private route: ActivatedRoute, private firestore: FirestoreService<Business>) { }
 
   ngOnInit() {
     const urlSegments = this.route.snapshot.url;

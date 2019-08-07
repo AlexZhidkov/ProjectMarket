@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppEvent } from '../model/app-event';
+import { Business } from '../model/business';
 
 @Component({
   selector: 'app-business-onboard',
@@ -13,8 +14,8 @@ import { AppEvent } from '../model/app-event';
 export class BusinessOnboardComponent implements OnInit {
   isLoading = true;
   businessId: string;
-  businessDoc: AngularFirestoreDocument<any>;
-  business: Observable<any>;
+  businessDoc: AngularFirestoreDocument<Business>;
+  business: Observable<Business>;
   businessFormGroup: FormGroup;
   extraFormGroup: FormGroup;
   whyFormGroup: FormGroup;
