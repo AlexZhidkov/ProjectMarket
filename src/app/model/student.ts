@@ -1,4 +1,6 @@
-export interface Student {
+import { BaseEntity } from './base-entity';
+
+export interface Student extends BaseEntity {
     studyArea: string;
     isStudying: boolean;
     university: string;

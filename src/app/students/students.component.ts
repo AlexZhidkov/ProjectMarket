@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Student } from '../model/student';
 import { FirestoreService } from '../services/firestore.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class StudentsComponent implements OnInit {
   isLoading = true;
-  students: Observable<any[]>;
+  students: Observable<Student[]>;
 
-  constructor(private firestore: FirestoreService<any>) { }
+  constructor(private firestore: FirestoreService<Student>) { }
 
   ngOnInit() {
     this.firestore.setCollection('students');

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Business } from '../model/business';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
 
@@ -10,9 +11,9 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class ReferrerComponent implements OnInit {
   isLoading = true;
-  draftBusinesses: Observable<any[]>;
+  draftBusinesses: Observable<Business[]>;
 
-  constructor(private authService: AuthService, private firestore: FirestoreService<any>) { }
+  constructor(private authService: AuthService, private firestore: FirestoreService<Business>) { }
 
   ngOnInit() {
     this.firestore.setCollection('businesses', ref => ref
