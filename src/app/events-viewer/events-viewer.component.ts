@@ -15,7 +15,7 @@ export class EventsViewerComponent implements OnInit {
   constructor(private firestore: FirestoreService<AppEvent>) { }
 
   ngOnInit() {
-    this.firestore.setCollection('events', ref => ref.orderBy('created', 'desc').limit(100));
+    this.firestore.setCollection('events', ref => ref.orderBy('createdOn', 'desc').limit(100));
     this.events = this.firestore.list();
     this.events.subscribe(e => {
       this.isLoading = false;

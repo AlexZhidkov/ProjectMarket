@@ -1,9 +1,8 @@
+import { BaseEntity } from './base-entity';
 import { UserShort } from './user-short';
 
-export interface AppEvent {
-    id?: string;
+export interface AppEvent extends BaseEntity {
     title: string;
     data: any;
-    created: Date;
     user: UserShort;
 }

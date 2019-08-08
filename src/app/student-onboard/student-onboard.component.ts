@@ -39,7 +39,7 @@ export class StudentOnboardComponent implements OnInit {
         const student = studentSnapshot.data() as UserProfile;
         student.id = studentSnapshot.id;
         const event: AppEvent = {
-          created: new Date(),
+          createdOn: new Date(),
           title: 'Student submitted form',
           data: student,
           user: {

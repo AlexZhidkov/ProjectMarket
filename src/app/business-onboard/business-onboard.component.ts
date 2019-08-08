@@ -87,7 +87,7 @@ export class BusinessOnboardComponent implements OnInit {
           const business = businessSnapshot.data();
           business.id = businessSnapshot.id;
           const event: AppEvent = {
-            created: new Date(),
+            createdOn: new Date(),
             title: 'Business submitted form',
             data: business,
             user: {
