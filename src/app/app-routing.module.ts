@@ -8,6 +8,8 @@ import { BusinessesComponent } from './businesses/businesses.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectsComponent } from './projects/projects.component';
 import { ReferrerComponent } from './referrer/referrer.component';
 import { AuthGuard } from './services/auth.guard';
 import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
@@ -33,6 +35,9 @@ const routes: Routes = [
   { path: 'business/:id', component: BusinessViewComponent },
   { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
+  { path: 'project', component: ProjectComponent },
+  { path: 'project/:id', component: ProjectComponent },
+  { path: 'projects', component: ProjectsComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'events', component: EventsViewerComponent },
   { path: 'users', component: UsersViewerComponent },
