@@ -49,6 +49,7 @@ import { StudentsComponent } from './students/students.component';
 import { BusinessViewComponent } from './business-view/business-view.component';
 import { StudentViewComponent } from './student-view/student-view.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
+import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { EventsViewerComponent } from './events-viewer/events-viewer.component';
     StudentsComponent,
     BusinessViewComponent,
     StudentViewComponent,
-    EventsViewerComponent
+    EventsViewerComponent,
+    UsersViewerComponent
   ],
   imports: [
     BrowserModule,

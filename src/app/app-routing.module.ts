@@ -15,6 +15,7 @@ import { StudentOnboardComponent } from './student-onboard/student-onboard.compo
 import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
+import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'admin', component: AdminComponent },
   { path: 'events', component: EventsViewerComponent },
+  { path: 'users', component: UsersViewerComponent },
   { path: '**', component: HomeComponent }
 ];
 
