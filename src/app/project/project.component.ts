@@ -12,7 +12,7 @@ import { Project } from '../model/project';
 })
 export class ProjectComponent implements OnInit {
   projectId: string;
-  private projectDoc: AngularFirestoreDocument<Project>;
+  projectDoc: AngularFirestoreDocument<Project>;
   project: Observable<Project>;
 
   constructor(
