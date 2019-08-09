@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NamedEntity } from '../model/named-entity';
 import { Project } from '../model/project';
 
 @Component({
@@ -17,7 +18,6 @@ export class ProjectComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private route: ActivatedRoute,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -39,5 +39,27 @@ export class ProjectComponent implements OnInit {
       });
     }
     this.project = this.projectDoc.valueChanges();
+  }
+
+  assignBusiness(id: string) {
+    this.afs.collection('businesses').doc(id).get().subscribe(businessSnapshot => {
+      const business = businessSnapshot.data();
+      const assignedBusiness: NamedEntity = {
+        id,
+        name: business.name
+      };
+      this.projectDoc.update({ business: assignedBusiness });
+    });
+  }
+
+  assignStudent(id: string) {
+    this.afs.collection('students').doc(id).get().subscribe(studentSnapshot => {
+      const student = studentSnapshot.data();
+      const assignedStudent: NamedEntity = {
+        id,
+        name: student.name
+      };
+      this.projectDoc.update({ student: assignedStudent });
+    });
   }
 }
