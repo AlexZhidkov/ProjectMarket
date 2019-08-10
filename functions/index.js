@@ -37,7 +37,7 @@ const mailTransport = nodemailer.createTransport({
 
 // Your company name to include in the emails
 // TODO: Change this to your app or company name to customize the email sent.
-const APP_NAME = 'PracLearn';
+const APP_NAME = functions.config().app.name;
 
 /**
  * Sends an email for each new document in firestore collection.
