@@ -21,27 +21,27 @@ import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: StudentComponent },
-  { path: 'students', component: StudentsComponent },
-  { path: 'student', component: StudentComponent },
+  { path: 'profile', component: StudentComponent, canActivate: [AuthGuard] },
+  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+  { path: 'student', component: StudentComponent, canActivate: [AuthGuard] },
   { path: 'student/form', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
   { path: 'student/form/confirmation', component: StudentConfirmationScreenComponent },
   { path: 'student/signup', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
-  { path: 'student/:id', component: StudentViewComponent },
-  { path: 'businesses', component: BusinessesComponent },
-  { path: 'business', component: BusinessComponent },
-  { path: 'business/form', component: BusinessOnboardComponent },
-  { path: 'business/form/:id', component: BusinessOnboardComponent },
-  { path: 'business/:id', component: BusinessViewComponent },
+  { path: 'student/:id', component: StudentViewComponent, canActivate: [AuthGuard] },
+  { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
+  { path: 'business', component: BusinessComponent, canActivate: [AuthGuard] },
+  { path: 'business/form', component: BusinessOnboardComponent, canActivate: [AuthGuard] },
+  { path: 'business/form/:id', component: BusinessOnboardComponent, canActivate: [AuthGuard] },
+  { path: 'business/:id', component: BusinessViewComponent, canActivate: [AuthGuard] },
   { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
-  { path: 'project', component: ProjectComponent },
-  { path: 'project/:id', component: ProjectComponent },
-  { path: 'projects', component: ProjectsComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'events', component: EventsViewerComponent },
-  { path: 'users', component: UsersViewerComponent },
-  { path: '**', component: HomeComponent }
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'events', component: EventsViewerComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersViewerComponent, canActivate: [AuthGuard] },
+  { path: '**', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
