@@ -72,6 +72,33 @@ $mat-app-accent: (
     )
 );
 
+$app-primary: mat-palette($mat-app-primary);
+$app-accent:  mat-palette($mat-app-accent);
+
+$app-theme: mat-light-theme($app-primary, $app-accent);
+
+@mixin mix-app-theme($app-theme) {
+  $primary: map-get($app-theme, primary);
+
+  $primary: map-get($app-theme, primary);
+
+  .mat-button-toggle-checked {
+    background-color: mat-color($primary);
+    font-weight: bold;
+
+    .mat-button-toggle-label-content{
+        color: $light-primary-text;
+    }
+  }
+}
+
+
+  $accent: map-get($app-theme, accent);
+
+
+
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -87,4 +114,12 @@ $wil-app-theme: mat-light-theme($wil-app-primary, $wil-app-accent, $wil-app-warn
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+
 @include angular-material-theme($wil-app-theme);
+
+
+// Include the mixin
+// @include LAST mix-app-theme, must be added after @include angular-material-theme if you use a custom theme //
+
+@include angular-material-theme($app-theme);
+@include mix-app-theme($app-theme);
