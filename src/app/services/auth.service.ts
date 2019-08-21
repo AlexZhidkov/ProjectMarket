@@ -75,11 +75,11 @@ export class AuthService {
       email: authData.email,
       authEmail: authData.email,
       photoURL: authData.photoURL,
-      roles: {}
+      role: 'student'
     };
     switch (localStorage.getItem('userPrimaryRole')) {
       case 'Student':
-        user.roles.isStudent = true;
+        user.role = 'student';
         break;
     }
     const userDoc = this.afs.doc<UserProfile>('users/' + authData.uid).set(user, { merge: true });

@@ -8,12 +8,6 @@ export interface UserProfile extends UserShort {
     email: string;
     authEmail: string;
     photoURL: string;
-    roles: Roles;
+    role: 'student' | 'business' | 'referrer' | 'admin';
     student?: Student;
-}
-
-interface Roles {
-    isAdmin?: boolean;
-    isStudent?: boolean;
-    isBusiness?: boolean;
 }
