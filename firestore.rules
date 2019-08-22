@@ -13,27 +13,28 @@ service cloud.firestore {
       allow read, write: if isAdmin() || isReferrer();      
     }
     match /students/{userId}/{document=**} {
-      allow read: if request.auth.uid != null || isAdmin() || isReferrer() || isBusiness();
+      allow read: if request.auth.uid == userId || isAdmin() || isReferrer() || isBusiness();
       allow write: if request.auth.uid == userId || isAdmin();
     }
 		match /users/{userId}/{document=**} {
-      allow read, write: if request.auth.uid == userId
+      allow read: if request.auth.uid == userId || isAdmin();
+			allow write: if request.auth.uid == userId
     }
     
     function getUserData(){
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
     function isAdmin(){
-      return getUserData().roles.isAdmin;
+      return getUserData().role == 'admin';
     }
     function isReferrer(){
-      return getUserData().roles.isReferrer;
+      return getUserData().role == 'referrer';
     }
     function isStudent(){
-      return getUserData().roles.isStudent;
+      return getUserData().role == 'student';
     }
     function isBusiness(){
-      return getUserData().roles.isBusiness;
+      return getUserData().role == 'business';
     }
   }
 }
