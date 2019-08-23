@@ -31,29 +31,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BusinessDashboardComponent } from './business-dashboard/business-dashboard.component';
 import { BusinessHelpComponent } from './business-help/business-help.component';
 import { BusinessOnboardComponent } from './business-onboard/business-onboard.component';
+import { BusinessViewComponent } from './business-view/business-view.component';
 import { BusinessComponent } from './business/business.component';
+import { BusinessesComponent } from './businesses/businesses.component';
+import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { StudentHelpComponent } from './student-help/student-help.component';
-import { StudentOnboardComponent } from './student-onboard/student-onboard.component';
-import { StudentComponent } from './student/student.component';
-import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
-import { ReferrerComponent } from './referrer/referrer.component';
-import { AdminComponent } from './admin/admin.component';
-import { BusinessesComponent } from './businesses/businesses.component';
-import { StudentsComponent } from './students/students.component';
-import { BusinessViewComponent } from './business-view/business-view.component';
-import { StudentViewComponent } from './student-view/student-view.component';
-import { EventsViewerComponent } from './events-viewer/events-viewer.component';
-import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { BussinessDashboardComponent } from './bussiness-dashboard/bussiness-dashboard.component';
+import { ReferrerComponent } from './referrer/referrer.component';
+import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { StudentHelpComponent } from './student-help/student-help.component';
+import { StudentOnboardComponent } from './student-onboard/student-onboard.component';
+import { StudentViewComponent } from './student-view/student-view.component';
+import { StudentComponent } from './student/student.component';
+import { StudentsComponent } from './students/students.component';
+import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     UsersViewerComponent,
     ProjectComponent,
     ProjectsComponent,
-    BussinessDashboardComponent,
+    BusinessDashboardComponent,
     StudentDashboardComponent
   ],
   imports: [
