@@ -48,17 +48,23 @@ const routes: Routes = [
       { path: '', component: BusinessDashboardComponent, data: { authRoles: ['all'] }, }
     ]
   },
+
+  // referrer section
   { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
+
+  // admin section.
+  // ToDo change all these routes to be children for 'admin' parent
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
   { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
   { path: 'events', component: EventsViewerComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersViewerComponent, canActivate: [AuthGuard] },
-  { path: '**', component: HomeComponent, canActivate: [AuthGuard] }
+
+  { path: '**', component: HomeComponent, canActivate: [AuthGuard] } // HomeComponent should be admin dashboard
 ];
 
 @NgModule({
