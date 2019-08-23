@@ -23,8 +23,6 @@ import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: StudentDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
   {
     path: 'student', component: StudentComponent, canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
@@ -37,7 +35,6 @@ const routes: Routes = [
       { path: '', component: StudentDashboardComponent, data: { authRoles: ['all'] }, }
     ]
   },
-  { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
   {
     path: 'business',
     component: BusinessComponent,
@@ -57,6 +54,8 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+  { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
   { path: 'events', component: EventsViewerComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersViewerComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomeComponent, canActivate: [AuthGuard] }
