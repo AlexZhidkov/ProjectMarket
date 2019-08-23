@@ -20,6 +20,8 @@ import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
+import {AdminDashboardComponent} from './admin-dashboard/admin-dashboard.component';
+import {ReferrerDashboardComponent} from './referrer-dashboard/referrer-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -50,19 +52,36 @@ const routes: Routes = [
   },
 
   // referrer section
-  { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
-  { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
+  {
+    path: 'referrer',
+    component: ReferrerComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    data: { authRoles: [ 'referrer', 'admin'] },
+    children: [
+      { path: 'businesses', component: BusinessesComponent, data: { role: 'Referrer' } },
+      { path: '', component: ReferrerDashboardComponent, data: { role: 'Referrer' } }
+    ]
+  },
 
   // admin section.
-  // ToDo change all these routes to be children for 'admin' parent
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
-  { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
-  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
-  { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
-  { path: 'events', component: EventsViewerComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UsersViewerComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    data: { authRoles: [ 'admin'] },
+    children: [
+      { path: 'project', component: ProjectComponent },
+      { path: 'project/:id', component: ProjectComponent },
+      { path: 'projects', component: ProjectsComponent },
+      { path: 'students', component: StudentsComponent },
+      { path: 'businesses', component: BusinessesComponent },
+      { path: 'events', component: EventsViewerComponent },
+      { path: 'users', component: UsersViewerComponent },
+      { path: '', component: AdminDashboardComponent }
+    ]
+  },
 
   { path: '**', component: HomeComponent, canActivate: [AuthGuard] } // HomeComponent should be admin dashboard
 ];
