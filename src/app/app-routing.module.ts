@@ -18,21 +18,38 @@ import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
+import {StudentDashboardComponent} from './student-dashboard/student-dashboard.component';
+import {BussinessDashboardComponent} from './bussiness-dashboard/bussiness-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: StudentComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: StudentDashboardComponent, canActivate: [AuthGuard] },
   { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
-  { path: 'student', component: StudentComponent, canActivate: [AuthGuard] },
-  { path: 'student/form', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
-  { path: 'student/form/confirmation', component: StudentConfirmationScreenComponent },
-  { path: 'student/signup', component: StudentOnboardComponent, canActivate: [AuthGuard], data: { role: 'Student' } },
-  { path: 'student/:id', component: StudentViewComponent, canActivate: [AuthGuard] },
+  { path: 'student', component: StudentComponent, canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    data: { authRoles: ['student'] },
+    children: [
+      { path: 'form', component: StudentOnboardComponent,    },
+      { path: 'signup', component: StudentOnboardComponent, data: { role: 'Student' } },
+      { path: 'form/confirmation', component: StudentConfirmationScreenComponent },
+      { path: 'student/:id', component: StudentViewComponent },
+      { path: '', component: StudentDashboardComponent,  data: { authRoles: ['all'] }, }
+    ]
+  },
   { path: 'businesses', component: BusinessesComponent, canActivate: [AuthGuard] },
-  { path: 'business', component: BusinessComponent, canActivate: [AuthGuard] },
-  { path: 'business/form', component: BusinessOnboardComponent, canActivate: [AuthGuard] },
-  { path: 'business/form/:id', component: BusinessOnboardComponent, canActivate: [AuthGuard] },
-  { path: 'business/:id', component: BusinessViewComponent, canActivate: [AuthGuard] },
+  {
+    path: 'business',
+    component: BusinessComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    data: { authRoles: ['business'] },
+    children: [
+      { path: 'form', component: BusinessOnboardComponent },
+      { path: 'form/:id', component: BusinessOnboardComponent },
+      { path: ':id', component: BusinessViewComponent },
+      { path: '', component: BussinessDashboardComponent, data: { authRoles: ['all'] }, }
+    ]
+  },
   { path: 'referrer', component: ReferrerComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'referrer/businesses', component: BusinessesComponent, canActivate: [AuthGuard], data: { role: 'Referrer' } },
   { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
