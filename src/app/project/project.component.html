@@ -9,6 +9,15 @@
                     (ngModelChange)="projectDoc.update({name: $event})">
             </mat-form-field>
             <mat-form-field>
+                <input matInput type="text" name="description" placeholder="Description"
+                    [ngModel]="(project | async)?.description"
+                    (ngModelChange)="projectDoc.update({description: $event})">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" name="status" placeholder="Status" [ngModel]="(project | async)?.status"
+                    (ngModelChange)="projectDoc.update({status: $event})">
+            </mat-form-field>
+            <mat-form-field>
                 <input matInput #businessId type="text" name="business" placeholder="Business ID">
                 <button mat-raised-button matSuffix (click)="assignBusiness(businessId.value)">
                     Assign Business to Project
