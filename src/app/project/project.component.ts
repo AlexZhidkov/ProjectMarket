@@ -62,4 +62,9 @@ export class ProjectComponent implements OnInit {
       this.projectDoc.update({ student: assignedStudent });
     });
   }
+
+  deleteProject() {
+    this.afs.doc<any>(`projects/${this.projectId}`).delete();
+    // ToDo navigate away from this page
+  }
 }
