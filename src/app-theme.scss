@@ -8,6 +8,7 @@ $custom-typography: mat-typography-config(
   $body-1: mat-typography-level(16px, 24px, 500)
 );
 
+// https://github.com/angular/components/issues/8416
 .mat-checkbox-layout {
     white-space: normal !important;
 }
