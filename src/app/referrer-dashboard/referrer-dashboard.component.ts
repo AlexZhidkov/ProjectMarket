@@ -20,13 +20,13 @@ export class ReferrerDashboardComponent implements OnInit {
       icon: 'add'
     },
     {
-      label: 'Complete Business',
-      routerLink: '/business/form',
-      icon: 'check'
+      label: 'View Businesses',
+      routerLink: 'businesses',
+      icon: 'view_list'
     },
     {
       label: 'View Projects',
-      routerLink: '/projects',
+      routerLink: 'projects',
       icon: 'view_list'
     }
   ];
