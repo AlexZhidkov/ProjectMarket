@@ -5,4 +5,9 @@ export interface Project extends NamedEntity {
     status: string;
     business: NamedEntity;
     student: NamedEntity;
+    isStudentAccepted: boolean;
+    isBusinessAccepted: boolean;
+    isDocumentationCompleted: boolean;
+    isProjectStarted: boolean;
+    isProjectFinished: boolean;
 }
