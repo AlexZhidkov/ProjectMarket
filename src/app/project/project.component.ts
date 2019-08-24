@@ -29,6 +29,8 @@ export class ProjectComponent implements OnInit {
       this.projectDoc = this.afs.collection('projects').doc(this.projectId);
       this.projectDoc.set({
         name: null,
+        description: null,
+        status: 'New project',
         business: null,
         student: null,
         createdOn: new Date(),
