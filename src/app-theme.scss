@@ -83,7 +83,7 @@ $mat-app-accent: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $wil-app-primary: mat-palette($mat-app-primary);
-$wil-app-accent:  mat-palette($mat-app-accent, A200, A100, A400);
+$wil-app-accent:  mat-palette($mat-app-accent, 500, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $wil-app-warn:    mat-palette($mat-red);

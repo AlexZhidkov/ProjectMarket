@@ -3,91 +3,91 @@
 <mat-vertical-stepper *ngIf="!isLoading" linear #stepper>
     <mat-step [stepControl]="businessFormGroup">
         <form [formGroup]="businessFormGroup">
-            <div class="form-container">
+            <div class="form-container" fxLayout="row wrap" fxLayoutGap="20px" fxLayout.xs="column">
                 <ng-template matStepLabel>Partner with students to get projects done</ng-template>
                 <p>To gain access to Experlio`s talent pool of students, please provide the following information.</p>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="ABN" formControlName="abn"
                         (ngModelChange)="businessDoc.update({abn: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Business Name" formControlName="name" required
                         (ngModelChange)="businessDoc.update({name: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Supervisor name" formControlName="supervisor"
                         (ngModelChange)="businessDoc.update({supervisor: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Address of your physical premises" formControlName="address" required
                         (ngModelChange)="businessDoc.update({address: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Number of F/T Employees" formControlName="fteNumber"
                         (ngModelChange)="businessDoc.update({fteNumber: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Additional Employees" formControlName="additionalEmployees"
                         (ngModelChange)="businessDoc.update({additionalEmployees: $event})">
                 </mat-form-field>
-                <mat-checkbox formControlName="isMentorAvailable"
+                <mat-checkbox fxFlex="100" color="accent" formControlName="isMentorAvailable"
                     (ngModelChange)="businessDoc.update({isMentorAvailable: $event})">
                     Are you working with a mentor or tutor?
                 </mat-checkbox>
-                <mat-form-field *ngIf="businessFormGroup.get('isMentorAvailable').value">
+                <mat-form-field fxFlex="100" *ngIf="businessFormGroup.get('isMentorAvailable').value">
                     <input matInput placeholder="Their details" formControlName="mentor"
                         (ngModelChange)="businessDoc.update({mentor: $event})">
                 </mat-form-field>
                 <div>
-                    <button type="button" mat-button matStepperNext>Next</button>
+                    <button type="button" mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="extraFormGroup">
         <form [formGroup]="extraFormGroup">
-            <div class="form-container">
+            <div class="form-container" fxLayout="row wrap" fxLayoutGap="20px" fxLayout.xs="column">
                 <ng-template matStepLabel>Get A Tailored Match</ng-template>
                 <p>
                     So that we can match your business with the right student, we’ve just got a couple more questions.
                 </p>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Website" formControlName="website"
                         (ngModelChange)="businessDoc.update({website: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Industry" formControlName="industry"
                         (ngModelChange)="businessDoc.update({industry: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="100">
                     <textarea matInput placeholder="In 100 words or less, what makes your business unique?" rows="5"
                         formControlName="description"
                         (ngModelChange)="businessDoc.update({description: $event})"></textarea>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput [matDatepicker]="picker" placeholder="Start Date" formControlName="startDate"
                         (dateChange)="businessDoc.update({startDate: $event.value})">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate"
                         (dateChange)="businessDoc.update({endDate: $event.value})">
                     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                     <mat-datepicker #endDatePicker></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Supervisor’s role" formControlName="supervisorRole"
                         (ngModelChange)="businessDoc.update({supervisorRole: $event})">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field fxFlex="45">
                     <input matInput placeholder="Experience" formControlName="supervisorExperience"
                         (ngModelChange)="businessDoc.update({supervisorExperience: $event})">
                 </mat-form-field>
 
-                <div>
-                    <button type="button" mat-button matStepperPrevious>Back</button>
-                    <button type="button" mat-button matStepperNext>Next</button>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button type="button" mat-raised-button color="primary" matStepperPrevious>Back</button>
+                    <button type="button" mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </div>
         </form>
@@ -116,9 +116,9 @@
                     <textarea matInput placeholder="Other" rows="5" formControlName="other"
                         (ngModelChange)="businessDoc.set({why: {other: $event}}, { merge: true })"></textarea>
                 </mat-form-field>
-                <div>
-                    <button type="button" mat-button matStepperPrevious>Back</button>
-                    <button type="button" mat-button (click)="submit()">Submit</button>
+                <div fxLayout="row" fxLayoutGap="20px">
+                    <button type="button" mat-raised-button color="primary" matStepperPrevious>Back</button>
+                    <button type="button" mat-raised-button color="primary" (click)="submit()">Submit</button>
                 </div>
             </div>
         </form>
