@@ -4,6 +4,7 @@ import { Business } from '../model/business';
 import { Project } from '../model/project';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
+import { DashboardButton } from '../dashboard-button/dashboard-button.component';
 
 @Component({
   selector: 'app-referrer-dashboard',
@@ -12,13 +13,47 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class ReferrerDashboardComponent implements OnInit {
 
+  refButtons: DashboardButton[] = [
+    {
+      label: 'Add Business',
+      routerLink: '/business/form',
+      icon: 'add'
+    },
+    {
+      label: 'Complete Business',
+      routerLink: '/business/form',
+      icon: 'check'
+    },
+    {
+      label: 'View Projects',
+      routerLink: '/projects',
+      icon: 'view_list'
+    }
+  ];
+
+  recentActivities = [
+    {
+      name: 'Business submitted form',
+      updated: new Date('1/28/16')
+    },
+    {
+      name: 'Business re-submitted form',
+      updated: new Date('1/20/16')
+    },
+    {
+      name: 'Recommended changes',
+      updated: new Date('1/15/16')
+    },
+  ];
+
+
   isLoading = true;
   draftBusinesses: Observable<Business[]>;
   projects: Observable<Project[]>;
 
   constructor(private authService: AuthService,
-              private businessStore: FirestoreService<Business>,
-              private projectStore: FirestoreService<Project>,
+    private businessStore: FirestoreService<Business>,
+    private projectStore: FirestoreService<Project>,
   ) { }
 
   ngOnInit() {
