@@ -5,29 +5,43 @@
     </mat-card-header>
     <mat-card-content>
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-        <mat-nav-list>
+        <!-- <mat-nav-list>
             <h3 mat-header>Incomplete forms</h3>
             <mat-list-item *ngFor="let business of draftBusinesses | async" routerLink="/business/form/{{business.id}}">
                 <h3 matLine> {{business.name}} </h3>
             </mat-list-item>
-        </mat-nav-list>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button routerLink="/business/form">Add New Business</button>
-        <button mat-raised-button routerLink="/referrer/businesses">Open List of Businesses</button>
-    </mat-card-actions>
-</mat-card>
-<mat-card>
-    <mat-card-header>
-        <mat-icon mat-card-avatar>work</mat-icon>
-        <mat-card-title>Projects</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <mat-nav-list>
-            <mat-list-item *ngFor="let project of projects | async" routerLink="/referrer/project/{{project.id}}">
-                <h3 matLine> {{project.name}} </h3>
-                <p matLine> {{project.status}} </p>
+        </mat-nav-list> -->
+        <br>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start">
+            <app-dashboard-button [spec]="refButton" fxFlex="30" *ngFor="let refButton of refButtons">
+
+            </app-dashboard-button>
+        </div>
+        <br>
+        <h3>Activities</h3>
+        <mat-divider></mat-divider>
+        <mat-list>
+            <mat-list-item *ngFor="let activity of recentActivities">
+                <mat-icon mat-list-icon>event</mat-icon>
+                <h4 mat-line>{{activity.name}}</h4>
+                <p mat-line> {{activity.updated | date}} </p>
             </mat-list-item>
-        </mat-nav-list>
+        </mat-list>
+        <mat-divider></mat-divider>
     </mat-card-content>
+</mat-card>
+
+<mat-card>
+<mat-card-header>
+    <mat-icon mat-card-avatar>work</mat-icon>
+    <mat-card-title>Projects</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+    <mat-nav-list>
+        <mat-list-item *ngFor="let project of projects | async" routerLink="/referrer/project/{{project.id}}">
+            <h3 matLine> {{project.name}} </h3>
+            <p matLine> {{project.status}} </p>
+        </mat-list-item>
+    </mat-nav-list>
+</mat-card-content>
 </mat-card>

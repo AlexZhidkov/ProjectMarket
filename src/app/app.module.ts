@@ -56,6 +56,7 @@ import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
+import { DashboardButtonComponent } from './dashboard-button/dashboard-button.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashbo
     BusinessDashboardComponent,
     StudentDashboardComponent,
     AdminDashboardComponent,
-    ReferrerDashboardComponent
+    ReferrerDashboardComponent,
+    DashboardButtonComponent
   ],
   imports: [
     BrowserModule,

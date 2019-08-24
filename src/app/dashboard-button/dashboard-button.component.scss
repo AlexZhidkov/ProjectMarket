@@ -1,0 +1,14 @@
+:host {
+    display: block;
+}
+
+.dashboard-button {
+    height: 100px;
+    background-color: #785ba5;
+    color: white;
+    cursor: pointer;
+}
+
+.dashboard-button:hover {
+    background-color: #d82387;
+}
