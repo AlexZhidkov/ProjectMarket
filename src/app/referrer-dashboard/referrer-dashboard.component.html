@@ -11,7 +11,23 @@
                 <h3 matLine> {{business.name}} </h3>
             </mat-list-item>
         </mat-nav-list>
+    </mat-card-content>
+    <mat-card-actions>
         <button mat-raised-button routerLink="/business/form">Add New Business</button>
         <button mat-raised-button routerLink="/referrer/businesses">Open List of Businesses</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>work</mat-icon>
+        <mat-card-title>Projects</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let project of projects | async" routerLink="/referrer/project/{{project.id}}">
+                <h3 matLine> {{project.name}} </h3>
+                <p matLine> {{project.description}} </p>
+            </mat-list-item>
+        </mat-nav-list>
     </mat-card-content>
 </mat-card>

@@ -58,6 +58,8 @@ const routes: Routes = [
     data: { authRoles: ['referrer', 'admin'] },
     children: [
       { path: 'businesses', component: BusinessesComponent, data: { role: 'Referrer' } },
+      { path: 'projects', component: ProjectsComponent },
+      { path: 'project/:id', component: ProjectComponent },
       { path: '', component: ReferrerDashboardComponent, data: { role: 'Referrer' } }
     ]
   },
