@@ -2,38 +2,52 @@
     <mat-card-header>
         <mat-card-title>Project</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-        <div class="form-container">
-            <mat-form-field>
-                <input matInput type="text" name="title" placeholder="Title" [ngModel]="(project | async)?.name"
-                    (ngModelChange)="projectDoc.update({name: $event})">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="text" name="description" placeholder="Description"
-                    [ngModel]="(project | async)?.description"
-                    (ngModelChange)="projectDoc.update({description: $event})">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="text" name="status" placeholder="Status" [ngModel]="(project | async)?.status"
-                    (ngModelChange)="projectDoc.update({status: $event})">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput #businessId type="text" name="business" placeholder="Business ID">
-                <button mat-raised-button matSuffix (click)="assignBusiness(businessId.value)">
-                    Assign Business to Project
-                </button>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput #studentId type="text" name="student" placeholder="Student ID">
-                <button mat-raised-button matSuffix (click)="assignStudent(studentId.value)">
-                    Assign Student to Project
-                </button>
-            </mat-form-field>
-        </div>
-        <pre>{{project | async | json}}</pre>
+    <mat-card-content class="form-container">
+        <mat-form-field>
+            <input matInput type="text" name="title" placeholder="Title" [ngModel]="(project | async)?.name"
+                (ngModelChange)="projectDoc.update({name: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput rows="5" name="description" placeholder="Description"
+                [ngModel]="(project | async)?.description" (ngModelChange)="projectDoc.update({description: $event})">
+                </textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="status" placeholder="Status" [ngModel]="(project | async)?.status"
+                (ngModelChange)="projectDoc.update({status: $event})">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput #businessId type="text" name="business" placeholder="Business ID">
+            <button mat-raised-button matSuffix (click)="assignBusiness(businessId.value)">
+                Assign Business to Project
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput #studentId type="text" name="student" placeholder="Student ID">
+            <button mat-raised-button matSuffix (click)="assignStudent(studentId.value)">
+                Assign Student to Project
+            </button>
+        </mat-form-field>
+        <mat-checkbox name="isStudentAccepted" [ngModel]="(project | async)?.isStudentAccepted"
+            (ngModelChange)="projectDoc.update({isStudentAccepted: $event})">Student accepted
+        </mat-checkbox>
+        <mat-checkbox name="isBusinessAccepted" [ngModel]="(project | async)?.isBusinessAccepted"
+            (ngModelChange)="projectDoc.update({isBusinessAccepted: $event})">Business accepted
+        </mat-checkbox>
+        <mat-checkbox name="isDocumentationCompleted" [ngModel]="(project | async)?.isStudentAccepted"
+            (ngModelChange)="projectDoc.update({isDocumentationCompleted: $event})">Documentation completed
+        </mat-checkbox>
+        <mat-checkbox name="isProjectStarted" [ngModel]="(project | async)?.isProjectStarted"
+            (ngModelChange)="projectDoc.update({isProjectStarted: $event})">Project started
+        </mat-checkbox>
+        <mat-checkbox name="isProjectFinished" [ngModel]="(project | async)?.isProjectFinished"
+            (ngModelChange)="projectDoc.update({isProjectFinished: $event})">Project finished
+        </mat-checkbox>
+
     </mat-card-content>
     <mat-card-actions>
         <button mat-raised-button routerLink="/projects">Projects List</button>
         <button mat-raised-button color="warn" (click)="deleteProject()">Delete this Project</button>
     </mat-card-actions>
 </mat-card>
+<pre>{{project | async | json}}</pre>
