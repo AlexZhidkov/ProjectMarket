@@ -33,6 +33,11 @@ export class ProjectComponent implements OnInit {
         status: 'New project',
         business: null,
         student: null,
+        isStudentAccepted: false,
+        isBusinessAccepted: false,
+        isDocumentationCompleted: false,
+        isProjectStarted: false,
+        isProjectFinished: false,
         createdOn: new Date(),
         createdBy: {
           uid: localStorage.getItem('uid'),
