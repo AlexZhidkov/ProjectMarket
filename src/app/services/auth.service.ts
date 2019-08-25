@@ -79,7 +79,7 @@ export class AuthService {
 
     this.afs.doc('users/' + authData.uid).get().subscribe(userSnapshot => {
       if (!userSnapshot.exists) {
-        user.role = 'student';
+        user.role = localStorage.getItem('newUserRole');
       }
       this.afs.doc<any>('users/' + authData.uid).set(user, { merge: true });
     });

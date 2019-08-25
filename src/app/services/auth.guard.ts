@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       tap(isAuthenticated => {
         if (!isAuthenticated) {
           localStorage.setItem('authReturnUrl', state.url);
+          localStorage.setItem('newUserRole', next.data.newUserRole);
           this.router.navigate(['/login']);
         }
       }));
