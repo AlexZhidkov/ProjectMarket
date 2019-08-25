@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DashboardButton } from '../dashboard-button/dashboard-button.component';
 import { Business } from '../model/business';
 import { Project } from '../model/project';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
-import { DashboardButton } from '../dashboard-button/dashboard-button.component';
 
 @Component({
   selector: 'app-referrer-dashboard',
@@ -52,8 +52,8 @@ export class ReferrerDashboardComponent implements OnInit {
   projects: Observable<Project[]>;
 
   constructor(private authService: AuthService,
-    private businessStore: FirestoreService<Business>,
-    private projectStore: FirestoreService<Project>,
+              private businessStore: FirestoreService<Business>,
+              private projectStore: FirestoreService<Project>,
   ) { }
 
   ngOnInit() {

@@ -46,7 +46,7 @@ const routes: Routes = [
     children: [
       { path: 'form', component: BusinessOnboardComponent },
       { path: 'form/:id', component: BusinessOnboardComponent },
-      { path: ':id', component: BusinessViewComponent },
+      { path: 'view/:id', component: BusinessViewComponent },
       { path: '', component: BusinessDashboardComponent }
     ]
   },
@@ -58,8 +58,6 @@ const routes: Routes = [
     data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
       { path: 'businesses', component: BusinessesComponent },
-      { path: 'projects', component: ProjectsComponent },
-      { path: 'project/:id', component: ProjectComponent },
       { path: '', component: ReferrerDashboardComponent }
     ]
   },
@@ -70,9 +68,6 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['admin'] },
     children: [
-      { path: 'project', component: ProjectComponent },
-      { path: 'project/:id', component: ProjectComponent },
-      { path: 'projects', component: ProjectsComponent },
       { path: 'students', component: StudentsComponent },
       { path: 'businesses', component: BusinessesComponent },
       { path: 'events', component: EventsViewerComponent },
@@ -80,6 +75,8 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent }
     ]
   },
+  { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomeComponent }
 ];
 
