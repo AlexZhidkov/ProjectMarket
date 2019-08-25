@@ -10,6 +10,7 @@ import { BusinessesComponent } from './businesses/businesses.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
@@ -57,6 +58,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
+      { path: 'projects/:id', component: ProjectViewComponent },
+      { path: 'projects', component: ProjectsComponent },
       { path: 'businesses', component: BusinessesComponent },
       { path: '', component: ReferrerDashboardComponent }
     ]
@@ -68,6 +71,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['admin'] },
     children: [
+      { path: 'projects/:id', component: ProjectComponent },
+      { path: 'projects', component: ProjectsComponent },
       { path: 'students', component: StudentsComponent },
       { path: 'businesses', component: BusinessesComponent },
       { path: 'events', component: EventsViewerComponent },
@@ -75,8 +80,6 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent }
     ]
   },
-  { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
-  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomeComponent }
 ];
 

@@ -26,7 +26,7 @@ export class ReferrerDashboardComponent implements OnInit {
     },
     {
       label: 'View Projects',
-      routerLink: '/projects',
+      routerLink: 'projects',
       icon: 'view_list'
     }
   ];
