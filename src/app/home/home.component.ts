@@ -14,27 +14,22 @@ export class HomeComponent implements OnInit {
   }
 
   student() {
-    localStorage.setItem('userPrimaryRole', 'student');
     this.router.navigate(['/student/']);
   }
 
   business() {
-    localStorage.setItem('userPrimaryRole', 'business');
     this.router.navigate(['/business/']);
   }
 
   university() {
-    localStorage.setItem('userPrimaryRole', 'university');
     this.router.navigate(['/university/']);
   }
 
   referrer() {
-    localStorage.setItem('userPrimaryRole', 'referrer');
     this.router.navigate(['/referrer/']);
   }
 
   admin() {
-    localStorage.setItem('userPrimaryRole', 'admin');
     this.router.navigate(['/admin/']);
   }
 }

@@ -9,7 +9,6 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userPrimaryRole: string;
   provider = SignInProvider;
 
   constructor(public authService: AuthService,

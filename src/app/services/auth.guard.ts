@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import {tap, take, map} from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -18,45 +18,44 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       tap(isAuthenticated => {
         if (!isAuthenticated) {
           localStorage.setItem('authReturnUrl', state.url);
-          localStorage.setItem('userPrimaryRole', next.data.role);
           this.router.navigate(['/login']);
         }
       }));
 
   }
   canActivateChild(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean> {
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
 
-      return this.auth.user.pipe(
-          take(1),
-          map(user => {
-              let authRoles = [];
+    return this.auth.user.pipe(
+      take(1),
+      map(user => {
+        let authRoles = [];
 
-              if (route.parent.data.authRoles) {
-                  authRoles = route.parent.data.authRoles;
-              }
-              if (route.data.authRoles) {
-                  authRoles = route.data.authRoles;
-              }
+        if (route.parent.data.authRoles) {
+          authRoles = route.parent.data.authRoles;
+        }
+        if (route.data.authRoles) {
+          authRoles = route.data.authRoles;
+        }
 
-              if (!authRoles || authRoles.length === 0) {
-                  return true;
-              }
+        if (!authRoles || authRoles.length === 0) {
+          return true;
+        }
 
-              if (authRoles.includes(user.role) || authRoles.includes('all')) {
-                  return true;
-              }
+        if (authRoles.includes(user.role) || authRoles.includes('all')) {
+          return true;
+        }
 
-              return false;
+        return false;
 
-          }),
-          tap(isAble => {
-              if (!isAble) {
-                  this.router.navigate(['/']);
-              }
-          })
-      );
+      }),
+      tap(isAble => {
+        if (!isAble) {
+          this.router.navigate(['/']);
+        }
+      })
+    );
 
   }
 
