@@ -5,12 +5,12 @@
     </mat-card-header>
     <mat-card-content>
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-        <!-- <mat-nav-list>
+        <mat-nav-list>
             <h3 mat-header>Incomplete forms</h3>
             <mat-list-item *ngFor="let business of draftBusinesses | async" routerLink="/business/form/{{business.id}}">
                 <h3 matLine> {{business.name}} </h3>
             </mat-list-item>
-        </mat-nav-list> -->
+        </mat-nav-list>
         <br>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start">
             <app-dashboard-button [spec]="refButton" fxFlex="30" *ngFor="let refButton of refButtons">
@@ -32,16 +32,16 @@
 </mat-card>
 
 <mat-card>
-<mat-card-header>
-    <mat-icon mat-card-avatar>work</mat-icon>
-    <mat-card-title>Projects</mat-card-title>
-</mat-card-header>
-<mat-card-content>
-    <mat-nav-list>
-        <mat-list-item *ngFor="let project of projects | async" routerLink="/referrer/project/{{project.id}}">
-            <h3 matLine> {{project.name}} </h3>
-            <p matLine> {{project.status}} </p>
-        </mat-list-item>
-    </mat-nav-list>
-</mat-card-content>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>work</mat-icon>
+        <mat-card-title>Projects</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-nav-list>
+            <mat-list-item *ngFor="let project of projects | async" routerLink="/project/{{project.id}}">
+                <h3 matLine> {{project.name}} </h3>
+                <p matLine> {{project.status}} </p>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-card-content>
 </mat-card>

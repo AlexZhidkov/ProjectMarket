@@ -34,7 +34,7 @@
         <mat-checkbox name="isBusinessAccepted" [ngModel]="(project | async)?.isBusinessAccepted"
             (ngModelChange)="projectDoc.update({isBusinessAccepted: $event})">Business accepted
         </mat-checkbox>
-        <mat-checkbox name="isDocumentationCompleted" [ngModel]="(project | async)?.isStudentAccepted"
+        <mat-checkbox name="isDocumentationCompleted" [ngModel]="(project | async)?.isDocumentationCompleted"
             (ngModelChange)="projectDoc.update({isDocumentationCompleted: $event})">Documentation completed
         </mat-checkbox>
         <mat-checkbox name="isProjectStarted" [ngModel]="(project | async)?.isProjectStarted"
@@ -46,7 +46,6 @@
 
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button routerLink="/projects">Projects List</button>
         <button mat-raised-button color="warn" (click)="deleteProject()">Delete this Project</button>
     </mat-card-actions>
 </mat-card>

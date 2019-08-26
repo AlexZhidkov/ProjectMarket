@@ -10,6 +10,7 @@ import { BusinessesComponent } from './businesses/businesses.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
@@ -28,13 +29,13 @@ const routes: Routes = [
   {
     path: 'student', component: StudentComponent, canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    data: { authRoles: ['student', 'admin'] },
+    data: { authRoles: ['student', 'admin'], newUserRole: 'student' },
     children: [
+      { path: 'signup', component: StudentOnboardComponent, },
       { path: 'form', component: StudentOnboardComponent, },
-      { path: 'signup', component: StudentOnboardComponent, data: { role: 'Student' } },
       { path: 'form/confirmation', component: StudentConfirmationScreenComponent },
-      { path: 'student/:id', component: StudentViewComponent },
-      { path: '', component: StudentDashboardComponent, data: { authRoles: ['all'] }, }
+      { path: 'view/:id', component: StudentViewComponent },
+      { path: '', component: StudentDashboardComponent }
     ]
   },
   {
@@ -42,12 +43,12 @@ const routes: Routes = [
     component: BusinessComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    data: { authRoles: ['business', 'admin'] },
+    data: { authRoles: ['business', 'admin'], newUserRole: 'business' },
     children: [
       { path: 'form', component: BusinessOnboardComponent },
       { path: 'form/:id', component: BusinessOnboardComponent },
-      { path: ':id', component: BusinessViewComponent },
-      { path: '', component: BusinessDashboardComponent, data: { authRoles: ['all'] }, }
+      { path: 'view/:id', component: BusinessViewComponent },
+      { path: '', component: BusinessDashboardComponent }
     ]
   },
   {
@@ -55,12 +56,12 @@ const routes: Routes = [
     component: ReferrerComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    data: { authRoles: ['referrer', 'admin'] },
+    data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
-      { path: 'businesses', component: BusinessesComponent, data: { role: 'Referrer' } },
+      { path: 'projects/:id', component: ProjectViewComponent },
       { path: 'projects', component: ProjectsComponent },
-      { path: 'project/:id', component: ProjectComponent },
-      { path: '', component: ReferrerDashboardComponent, data: { role: 'Referrer' } }
+      { path: 'businesses', component: BusinessesComponent },
+      { path: '', component: ReferrerDashboardComponent }
     ]
   },
   {
@@ -70,8 +71,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['admin'] },
     children: [
-      { path: 'project', component: ProjectComponent },
-      { path: 'project/:id', component: ProjectComponent },
+      { path: 'projects/:id', component: ProjectComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: 'students', component: StudentsComponent },
       { path: 'businesses', component: BusinessesComponent },
@@ -80,7 +80,7 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent }
     ]
   },
-  { path: '**', component: HomeComponent, canActivate: [AuthGuard] }
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
     <mat-nav-list>
-        <mat-list-item *ngFor="let project of projects | async" routerLink="/project/{{project.id}}">
+        <mat-list-item *ngFor="let project of projects | async" routerLink="{{project.id}}">
             <h3 matLine> {{project.name}} </h3>
             <p matLine> {{project.business?.name}} {{project.student?.name}} </p>
         </mat-list-item>

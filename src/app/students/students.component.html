@@ -7,7 +7,7 @@
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
     <mat-nav-list>
-        <mat-list-item *ngFor="let student of students | async" routerLink="/student/{{student.id}}">
+        <mat-list-item *ngFor="let student of students | async" routerLink="/student/view/{{student.id}}">
             <img matListAvatar src={{student.photoURL}}>
             <h3 matLine> {{student.name}} </h3>
             <p matLine> {{student.email}} </p>

@@ -31,6 +31,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,11 +41,14 @@ import { BusinessOnboardComponent } from './business-onboard/business-onboard.co
 import { BusinessViewComponent } from './business-view/business-view.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessesComponent } from './businesses/businesses.component';
+import { DashboardButtonComponent } from './dashboard-button/dashboard-button.component';
 import { EventsViewerComponent } from './events-viewer/events-viewer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
 import { ReferrerComponent } from './referrer/referrer.component';
 import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
@@ -54,9 +58,6 @@ import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
-import { DashboardButtonComponent } from './dashboard-button/dashboard-button.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { DashboardButtonComponent } from './dashboard-button/dashboard-button.co
     StudentDashboardComponent,
     AdminDashboardComponent,
     ReferrerDashboardComponent,
-    DashboardButtonComponent
+    DashboardButtonComponent,
+    ProjectViewComponent
   ],
   imports: [
     BrowserModule,

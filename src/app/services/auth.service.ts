@@ -69,19 +69,19 @@ export class AuthService {
   }
 
   private updateUser(authData) {
-    const user: UserProfile = {
+    const user: any = {
       name: authData.displayName,
       authName: authData.displayName,
       email: authData.email,
       authEmail: authData.email,
-      photoURL: authData.photoURL,
-      role: 'student'
+      photoURL: authData.photoURL
     };
-    switch (localStorage.getItem('userPrimaryRole')) {
-      case 'Student':
-        user.role = 'student';
-        break;
-    }
-    const userDoc = this.afs.doc<UserProfile>('users/' + authData.uid).set(user, { merge: true });
+
+    this.afs.doc('users/' + authData.uid).get().subscribe(userSnapshot => {
+      if (!userSnapshot.exists) {
+        user.role = localStorage.getItem('newUserRole');
+      }
+      this.afs.doc<any>('users/' + authData.uid).set(user, { merge: true });
+    });
   }
 }
