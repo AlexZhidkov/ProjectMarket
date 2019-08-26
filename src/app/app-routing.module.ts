@@ -71,6 +71,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['admin'] },
     children: [
+      { path: 'project', component: ProjectComponent },
       { path: 'projects/:id', component: ProjectComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: 'students', component: StudentsComponent },
