@@ -30,37 +30,6 @@ export class BusinessViewComponent implements OnInit {
     this.businessId = this.route.snapshot.paramMap.get('id');
     this.businessDoc = this.afs.doc<Business>(`businesses/${this.businessId}`);
     this.business = this.businessDoc.valueChanges();
-    this.business.subscribe(r => {
-      this.businessFormGroup = this.formBuilder.group({
-        abn: [r.abn],
-        name: [r.name, Validators.required],
-        supervisor: [r.supervisor],
-        address: [r.address],
-        fteNumber: [r.fteNumber],
-        additionalEmployees: [r.additionalEmployees],
-        isMentorAvailable: [r.isMentorAvailable],
-        mentor: [r.mentor],
-      });
-      this.extraFormGroup = this.formBuilder.group({
-        website: [r.website],
-        industry: [r.industry],
-        description: [r.description],
-        startDate: [r.startDate ? new Date(r.startDate.seconds * 1000) : null],
-        endDate: [r.startDate ? new Date(r.endDate.seconds * 1000) : null],
-        supervisorRole: [r.supervisorRole],
-        supervisorExperience: [r.supervisorExperience],
-      });
-      this.whyFormGroup = this.formBuilder.group({
-        completeProject: [r.why.completeProject],
-        testStudent: [r.why.testStudent],
-        gainIdeas: [r.why.gainIdeas],
-        developMentors: [r.why.developMentors],
-        other: [r.why.other],
-      });
-
-      this.isLoading = false;
-
-    });
 
   }
 

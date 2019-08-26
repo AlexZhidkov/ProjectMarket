@@ -3,3 +3,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Montserrat, "Helvetica Neue", sans-serif; }
+
+.no-text-margins {
+    h2 {
+        margin: 0;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    h4 {
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+}

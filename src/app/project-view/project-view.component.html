@@ -1,1 +1,62 @@
-<pre>{{project | async | json}}</pre>
+<!-- <pre>{{project | async | json}}</pre> -->
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Project Details
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="project | async as proj">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon fxFlex="40px">supervisor_account</mat-icon>
+            <h3 fxFlex="auto">Project details</h3>
+        </div>
+        <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+            <div fxFlex="30">
+                <p class="label">Project name</p>
+                <p>{{proj.name}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Status</p>
+                <p>{{proj.status}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Project Started?</p>
+                <p>{{proj.projectStarted?'Yes':'No'}}</p>
+            </div>
+            <div fxFlex="100">
+                <p class="label">Description</p>
+                <p>{{proj.description}}</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column">
+            <div fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon fxFlex="40px">business_center</mat-icon>
+                    <h3 fxFlex="auto">Business</h3>
+                </div>
+                <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+                    <div fxFlex="100">
+                        <p class="label">Business Name</p>
+                        <p>{{proj.business.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="50">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon fxFlex="40px">person</mat-icon>
+                    <h3 fxFlex="auto">Student</h3>
+                </div>
+                <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+                    <div fxFlex="100">
+                        <p class="label">Name</p>
+                        <p>{{proj.student.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            <button type="button" mat-raised-button color="primary">Edit
+                Details</button>
+        </div>
+    </mat-card-content>
+</mat-card>

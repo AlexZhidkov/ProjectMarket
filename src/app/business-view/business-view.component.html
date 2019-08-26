@@ -1,107 +1,116 @@
-<!-- <pre>{{business | async | json}}</pre> -->
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            Business Detail
+            Business Details
         </mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-        <ng-container *ngIf="!isLoading">
-            <form [formGroup]="businessFormGroup" fxLayout="row wrap" fxLayoutGap="20px" fxLayout.xs="column">
-                <h3 fxFlex="100" matSubHeader>Basic information</h3>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="ABN" formControlName="abn"
-                        (ngModelChange)="businessDoc.update({abn: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Business Name" formControlName="name" required
-                        (ngModelChange)="businessDoc.update({name: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Supervisor name" formControlName="supervisor"
-                        (ngModelChange)="businessDoc.update({supervisor: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Address of your physical premises" formControlName="address" required
-                        (ngModelChange)="businessDoc.update({address: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Number of F/T Employees" formControlName="fteNumber"
-                        (ngModelChange)="businessDoc.update({fteNumber: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Additional Employees" formControlName="additionalEmployees"
-                        (ngModelChange)="businessDoc.update({additionalEmployees: $event})">
-                </mat-form-field>
-                <mat-checkbox color="accent" formControlName="isMentorAvailable"
-                    (ngModelChange)="businessDoc.update({isMentorAvailable: $event})">
-                    Are you working with a mentor or tutor?
-                </mat-checkbox>
-                <mat-form-field fxFlex="100" *ngIf="businessFormGroup.get('isMentorAvailable').value">
-                    <input matInput placeholder="Their details" formControlName="mentor"
-                        (ngModelChange)="businessDoc.update({mentor: $event})">
-                </mat-form-field>
-            </form>
-            <form [formGroup]="extraFormGroup" fxLayout="row wrap" fxLayoutGap="20px" fxLayout.xs="column">
-                <h3 fxFlex="100" matSubHeader>Extra information</h3>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Website" formControlName="website"
-                        (ngModelChange)="businessDoc.update({website: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Industry" formControlName="industry"
-                        (ngModelChange)="businessDoc.update({industry: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="100">
-                    <textarea matInput placeholder="In 100 words or less, what makes your business unique?" rows="5"
-                        formControlName="description"
-                        (ngModelChange)="businessDoc.update({description: $event})"></textarea>
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput [matDatepicker]="picker" placeholder="Start Date" formControlName="startDate"
-                        (dateChange)="businessDoc.update({startDate: $event.value})">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" formControlName="endDate"
-                        (dateChange)="businessDoc.update({endDate: $event.value})">
-                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-                    <mat-datepicker #endDatePicker></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Supervisor’s role" formControlName="supervisorRole"
-                        (ngModelChange)="businessDoc.update({supervisorRole: $event})">
-                </mat-form-field>
-                <mat-form-field fxFlex="45">
-                    <input matInput placeholder="Experience" formControlName="supervisorExperience"
-                        (ngModelChange)="businessDoc.update({supervisorExperience: $event})">
-                </mat-form-field>
-            </form>
-            <form [formGroup]="whyFormGroup" fxLayout="column">
-                <h3 matSubHeader>Why do you need a student?</h3>
-                <mat-checkbox formControlName="completeProject"
-                    (ngModelChange)="businessDoc.set({why: {completeProject: $event}}, { merge: true })">
-                    To complete a project I can’t afford to employ or dedicate time.
-                </mat-checkbox>
-                <mat-checkbox formControlName="testStudent"
-                    (ngModelChange)="businessDoc.set({why: {testStudent: $event}}, { merge: true })">
-                    To test whether a student might be a good fit for our organisation to work long term
-                </mat-checkbox>
-                <mat-checkbox formControlName="gainIdeas"
-                    (ngModelChange)="businessDoc.set({why: {gainIdeas: $event}}, { merge: true })">
-                    To gain new ideas
-                </mat-checkbox>
-                <mat-checkbox formControlName="developMentors"
-                    (ngModelChange)="businessDoc.set({why: {developMentors: $event}}, { merge: true })">
-                    To develop mentors and leaders within my business
-                </mat-checkbox>
-                <mat-form-field>
-                    <textarea matInput placeholder="Other" rows="5" formControlName="other"
-                        (ngModelChange)="businessDoc.set({why: {other: $event}}, { merge: true })"></textarea>
-                </mat-form-field>
-            </form>
-        </ng-container>
+    <mat-card-content *ngIf="business | async as bus">
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon fxFlex="40px">business_center</mat-icon>
+            <h3 fxFlex="auto">Basic Business Information</h3>
+        </div>
+        <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+            <div fxFlex="30">
+                <p class="label">Business Name</p>
+                <p>{{bus.name}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">ABN Number</p>
+                <p>{{bus.abn}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Address</p>
+                <p>{{bus.address}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Website</p>
+                <p>{{bus.website}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Industry</p>
+                <p>{{bus.industry}}</p>
+            </div>
+            <div fxFlex="100">
+                <p class="label">Short description</p>
+                <p>{{bus.description}}</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon fxFlex="40px">group</mat-icon>
+            <h3 fxFlex="auto">Employees</h3>
+        </div>
+        <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+            <div fxFlex="30">
+                <p class="label">Full time</p>
+                <p>{{bus.fteNumber}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Additional</p>
+                <p>{{bus.additionalEmployees}}</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon fxFlex="40px">supervisor_account</mat-icon>
+            <h3 fxFlex="auto">Supervisor Information</h3>
+        </div>
+        <div fxLayout="row wrap" class="no-text-margins bottom-margins" fxLayout.xs="column">
+            <div fxFlex="30">
+                <p class="label">Supervisor name</p>
+                <p>{{bus.supervisor}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Role</p>
+                <p>{{bus.supervisorRole}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Experience</p>
+                <p>{{bus.supervisorExperience}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Start Date</p>
+                <p>{{bus.startDate.seconds * 1000 | date}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">End Date</p>
+                <p>{{bus.endDate.seconds * 1000 | date}}</p>
+            </div>
+            <div fxFlex="30">
+                <p class="label">Mentor Available?</p>
+                <p>{{bus.isMentorAvailable?'Yes':'No'}}</p>
+            </div>
+            <div fxFlex="30" *ngIf="bus.isMentorAvailable">
+                <p class="label">Mentor Name</p>
+                <p>{{bus.mentor}}</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon fxFlex="40px">face</mat-icon>
+            <h3 fxFlex="auto">Needs a student because...</h3>
+        </div>
+        <div fxLayout="column" class="no-text-margins bottom-margins">
+            <mat-checkbox [(ngModel)]="bus.why.completeProject" [disabled]="true">
+                To complete a project I can’t afford to employ or dedicate time.
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="bus.why.testStudent" [disabled]="true">
+                To test whether a student might be a good fit for our organisation to work long term
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="bus.why.gainIdeas" [disabled]="true">
+                To gain new ideas
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="bus.why.developMentors" [disabled]="true">
+                To develop mentors and leaders within my business
+            </mat-checkbox>
+            <br>
+            <div *ngIf="bus.why.other">
+                <p class="label">Other reason</p>
+                <p>{{bus.why.other}}</p>
+            </div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayoutGap="20px">
+            <button type="button" mat-raised-button color="primary" routerLink="/business/form/{{businessId}}">Edit
+                Details</button>
+        </div>
     </mat-card-content>
 </mat-card>
+<!-- <pre>{{business | async | json}}</pre> -->

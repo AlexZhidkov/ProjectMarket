@@ -1,0 +1,13 @@
+.label {
+    font-size: 0.7rem;
+    color: darkgray;
+    text-transform: uppercase;
+}
+
+.mat-card-content {
+    margin-left: 16px;
+}
+
+.bottom-margins > div {
+    margin-bottom: 16px;
+}

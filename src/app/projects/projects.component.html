@@ -8,8 +8,10 @@
 
     <mat-nav-list>
         <mat-list-item *ngFor="let project of projects | async" routerLink="{{project.id}}">
-            <h3 matLine> {{project.name}} </h3>
-            <p matLine> {{project.business?.name}} {{project.student?.name}} </p>
+            <h3 matLine><strong>{{project.name}}</strong> </h3>
+            <p matLine> {{project.business?.name}} -- {{project.student?.name}} </p>
+            <p color="primary"><strong>{{project.status}}</strong></p>
+            <mat-divider></mat-divider>
         </mat-list-item>
     </mat-nav-list>
 </mat-card>
