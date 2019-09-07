@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { DashboardButton } from '../dashboard-button/dashboard-button.component';
 import { Business } from '../model/business';
@@ -12,7 +14,7 @@ import { FirestoreService } from '../services/firestore.service';
   styleUrls: ['./referrer-dashboard.component.css']
 })
 export class ReferrerDashboardComponent implements OnInit {
-
+  logoUrl: string;
   refButtons: DashboardButton[] = [
     {
       label: 'Add Business',
@@ -52,6 +54,8 @@ export class ReferrerDashboardComponent implements OnInit {
   projects: Observable<Project[]>;
 
   constructor(private authService: AuthService,
+              private afs: AngularFirestore,
+              private afStorage: AngularFireStorage,
               private businessStore: FirestoreService<Business>,
               private projectStore: FirestoreService<Project>,
   ) { }
@@ -70,6 +74,13 @@ export class ReferrerDashboardComponent implements OnInit {
     this.projects = this.projectStore.list();
     this.projects.subscribe(e => {
     });
-  }
 
+    this.afs.doc('users/' + this.authService.currentUser().uid).get()
+      .subscribe(userSnapshot => {
+        const storeRef = this.afStorage.ref('logos/' + userSnapshot.data().logoFileName);
+        storeRef.getDownloadURL().subscribe(url => {
+          this.logoUrl = url;
+        });
+      });
+  }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -101,6 +102,7 @@ import { UsersViewerComponent } from './users-viewer/users-viewer.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatToolbarModule,
@@ -128,7 +130,7 @@ import { UsersViewerComponent } from './users-viewer/users-viewer.component';
     MatAutocompleteModule
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-AU'}
+    { provide: MAT_DATE_LOCALE, useValue: 'en-AU' }
   ],
   bootstrap: [AppComponent]
 })

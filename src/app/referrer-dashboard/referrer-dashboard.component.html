@@ -1,7 +1,10 @@
 <mat-card>
-    <mat-card-header>
+    <mat-card-header *ngIf="!logoUrl">
         <mat-icon mat-card-avatar>supervisor_account</mat-icon>
         <mat-card-title>Referrer Dashboard</mat-card-title>
+    </mat-card-header>
+    <mat-card-header *ngIf="logoUrl">
+        <img height="40" [src]="logoUrl" alt="Logo">
     </mat-card-header>
     <mat-card-content>
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
@@ -11,7 +14,7 @@
                 <h3 matLine> {{business.name}} </h3>
             </mat-list-item>
         </mat-nav-list>
- -->
+    -->
         <br>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start">
             <app-dashboard-button [spec]="refButton" fxFlex="30" *ngFor="let refButton of refButtons">
