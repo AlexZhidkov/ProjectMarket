@@ -59,6 +59,7 @@ import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
+import { ReferrerHelpComponent } from './referrer-help/referrer-help.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { UsersViewerComponent } from './users-viewer/users-viewer.component';
     AdminDashboardComponent,
     ReferrerDashboardComponent,
     DashboardButtonComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    ReferrerHelpComponent
   ],
   imports: [
     BrowserModule,
