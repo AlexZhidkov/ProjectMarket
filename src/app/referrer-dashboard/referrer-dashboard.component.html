@@ -5,10 +5,8 @@
 
     <mat-card>
         <mat-card-header>
-            <span *ngIf="!logoUrl">
-                <mat-icon mat-card-avatar>supervisor_account</mat-icon>
-                <mat-card-title>Referrer Dashboard</mat-card-title>
-            </span>
+            <mat-icon *ngIf="!logoUrl" mat-card-avatar>supervisor_account</mat-icon>
+            <mat-card-title *ngIf="!logoUrl">Referrer Dashboard</mat-card-title>
             <img *ngIf="logoUrl" height="40" [src]="logoUrl" alt="Logo">
             <span class="fill-space"></span>
             <button mat-icon-button aria-label="Help" (click)="helpSidenav.open()">

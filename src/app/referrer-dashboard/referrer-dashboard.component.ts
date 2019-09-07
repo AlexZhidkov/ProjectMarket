@@ -77,10 +77,13 @@ export class ReferrerDashboardComponent implements OnInit {
 
     this.afs.doc('users/' + this.authService.currentUser().uid).get()
       .subscribe(userSnapshot => {
-        const storeRef = this.afStorage.ref('logos/' + userSnapshot.data().logoFileName);
-        storeRef.getDownloadURL().subscribe(url => {
-          this.logoUrl = url;
-        });
+        const logoFileName = userSnapshot.data().logoFileName;
+        if (logoFileName) {
+          const storeRef = this.afStorage.ref('logos/' + logoFileName);
+          storeRef.getDownloadURL().subscribe(url => {
+            this.logoUrl = url;
+          });
+        }
       });
   }
 }
