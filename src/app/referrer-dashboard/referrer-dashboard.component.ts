@@ -16,7 +16,7 @@ export class ReferrerDashboardComponent implements OnInit {
   refButtons: DashboardButton[] = [
     {
       label: 'Add Business',
-      routerLink: '/business/form',
+      routerLink: 'business/form',
       icon: 'add'
     },
     {

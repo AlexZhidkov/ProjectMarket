@@ -43,8 +43,9 @@ const routes: Routes = [
     component: BusinessComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-    data: { authRoles: ['business', 'admin'], newUserRole: 'business' },
+    data: { authRoles: ['business', 'referrer', 'admin'], newUserRole: 'business' },
     children: [
+      { path: 'signup', component: BusinessOnboardComponent, },
       { path: 'form', component: BusinessOnboardComponent },
       { path: 'form/:id', component: BusinessOnboardComponent },
       { path: 'view/:id', component: BusinessViewComponent },
@@ -58,9 +59,12 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
+      { path: 'businesses', component: BusinessesComponent },
+      { path: 'business/form', component: BusinessOnboardComponent },
+      { path: 'business/form/:id', component: BusinessOnboardComponent },
+      { path: 'business/view/:id', component: BusinessViewComponent },
       { path: 'projects/:id', component: ProjectViewComponent },
       { path: 'projects', component: ProjectsComponent },
-      { path: 'businesses', component: BusinessesComponent },
       { path: '', component: ReferrerDashboardComponent }
     ]
   },
