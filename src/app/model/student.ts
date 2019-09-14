@@ -1,6 +1,7 @@
 import { BaseEntity } from './base-entity';
 
 export interface Student extends BaseEntity {
+    template: string;
     studyArea: string;
     isStudying: boolean;
     university: string;

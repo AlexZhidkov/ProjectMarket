@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AppEvent } from '../model/app-event';
@@ -14,6 +15,7 @@ import { UserProfile } from '../model/user-profile';
 export class StudentOnboardComponent implements OnInit {
   isLoading = true;
   uid: string;
+  template: string;
   userDoc: AngularFirestoreDocument<UserProfile>;
   user: Observable<UserProfile>;
   personalFormGroup: FormGroup;
@@ -24,10 +26,12 @@ export class StudentOnboardComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.template = this.route.snapshot.paramMap.get('template');
     this.uid = localStorage.getItem('uid');
     this.userDoc = this.afs.doc<UserProfile>('users/' + this.uid);
     this.bindFormControls();
@@ -59,6 +63,7 @@ export class StudentOnboardComponent implements OnInit {
       if (!r) { return; }
       if (!r.student) {
         r.student = {
+          template: this.template,
           studyArea: null,
           isStudying: false,
           university: null,
@@ -70,6 +75,7 @@ export class StudentOnboardComponent implements OnInit {
           transcriptUrl: null
         };
       }
+      this.userDoc.set(r, { merge: true });
       this.personalFormGroup = this.formBuilder.group({
         nameCtrl: [r.name, Validators.required],
         emailCtrl: [r.email, Validators.required],

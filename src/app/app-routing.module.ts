@@ -32,6 +32,7 @@ const routes: Routes = [
     data: { authRoles: ['student', 'admin'], newUserRole: 'student' },
     children: [
       { path: 'signup', component: StudentOnboardComponent, },
+      { path: 'signup/:template', component: StudentOnboardComponent, },
       { path: 'form', component: StudentOnboardComponent, },
       { path: 'form/confirmation', component: StudentConfirmationScreenComponent },
       { path: 'view/:id', component: StudentViewComponent },
