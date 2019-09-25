@@ -3,6 +3,7 @@ import { BaseEntity } from './base-entity';
 export interface Business extends BaseEntity {
     abn?: string;
     name: string;
+    template?: string;
     supervisor?: string;
     address: string;
     fteNumber: string;

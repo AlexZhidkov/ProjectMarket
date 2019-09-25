@@ -13,6 +13,7 @@ import { Business } from '../model/business';
 })
 export class BusinessOnboardComponent implements OnInit {
   isLoading = true;
+  template: string;
   businessId: string;
   businessDoc: AngularFirestoreDocument<Business>;
   business: Observable<Business>;
@@ -28,6 +29,7 @@ export class BusinessOnboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.template = this.route.snapshot.paramMap.get('template');
     this.businessId = this.route.snapshot.paramMap.get('id');
     if (this.businessId) {
       this.bindFormControls();
@@ -47,6 +49,9 @@ export class BusinessOnboardComponent implements OnInit {
 
   bindFormControls() {
     this.businessDoc = this.afs.collection('businesses').doc(this.businessId);
+    if (this.template) {
+      this.businessDoc.update({ template: this.template });
+    }
     this.business = this.businessDoc.valueChanges();
     this.business.subscribe(r => {
       this.businessFormGroup = this.formBuilder.group({
