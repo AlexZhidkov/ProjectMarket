@@ -47,6 +47,7 @@ const routes: Routes = [
     data: { authRoles: ['business', 'referrer', 'admin'], newUserRole: 'business' },
     children: [
       { path: 'signup', component: BusinessOnboardComponent, },
+      { path: 'signup/:template', component: BusinessOnboardComponent, },
       { path: 'form', component: BusinessOnboardComponent },
       { path: 'form/:id', component: BusinessOnboardComponent },
       { path: 'view/:id', component: BusinessViewComponent },
