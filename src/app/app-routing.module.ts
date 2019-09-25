@@ -61,7 +61,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
-      { path: 'businesses', component: BusinessesComponent },
+      { path: 'businesses', component: BusinessesComponent, data: { isReferrer: true } },
       { path: 'business/form', component: BusinessOnboardComponent },
       { path: 'business/form/:id', component: BusinessOnboardComponent },
       { path: 'business/view/:id', component: BusinessViewComponent },
