@@ -16,7 +16,6 @@ export class BusinessesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private outlet: RouterOutlet, private firestore: FirestoreService<Business>) { }
 
   ngOnInit() {
-    const urlSegments = this.route.snapshot.url;
     // tslint:disable-next-line:no-string-literal
     if (this.outlet && this.outlet.activatedRouteData && this.outlet.activatedRouteData['isReferrer']) {
       this.firestore.setCollection('businesses', ref => ref

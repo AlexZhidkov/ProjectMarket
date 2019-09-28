@@ -62,11 +62,11 @@ const routes: Routes = [
     data: { authRoles: ['referrer', 'admin'], newUserRole: 'referrer' },
     children: [
       { path: 'businesses', component: BusinessesComponent, data: { isReferrer: true } },
-      { path: 'business/form', component: BusinessOnboardComponent },
-      { path: 'business/form/:id', component: BusinessOnboardComponent },
-      { path: 'business/view/:id', component: BusinessViewComponent },
-      { path: 'projects/:id', component: ProjectViewComponent },
-      { path: 'projects', component: ProjectsComponent },
+      { path: 'business/form', component: BusinessOnboardComponent, data: { isReferrer: true } },
+      { path: 'business/form/:id', component: BusinessOnboardComponent, data: { isReferrer: true } },
+      { path: 'business/view/:id', component: BusinessViewComponent, data: { isReferrer: true } },
+      { path: 'projects/:id', component: ProjectViewComponent, data: { isReferrer: true } },
+      { path: 'projects', component: ProjectsComponent, data: { isReferrer: true } },
       { path: '', component: ReferrerDashboardComponent }
     ]
   },

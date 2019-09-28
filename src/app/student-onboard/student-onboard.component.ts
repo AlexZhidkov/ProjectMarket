@@ -49,6 +49,10 @@ export class StudentOnboardComponent implements OnInit {
           user: {
             uid: localStorage.getItem('uid'),
             name: localStorage.getItem('userName')
+          },
+          student: {
+            uid: student.id,
+            name: student.name
           }
         };
 
