@@ -65,6 +65,8 @@ export class AuthService {
 
   signOut() {
     localStorage.removeItem('uid');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userRole');
     this.afAuth.auth.signOut();
   }
 
@@ -80,7 +82,11 @@ export class AuthService {
     this.afs.doc('users/' + authData.uid).get().subscribe(userSnapshot => {
       if (!userSnapshot.exists) {
         user.role = localStorage.getItem('newUserRole');
+        localStorage.setItem('userRole', user.role);
+      } else {
+        localStorage.setItem('userRole', userSnapshot.data().role);
       }
+
       this.afs.doc<any>('users/' + authData.uid).set(user, { merge: true });
     });
   }

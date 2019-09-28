@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Business } from '../model/business';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-business-view',
@@ -20,17 +20,13 @@ export class BusinessViewComponent implements OnInit {
   whyFormGroup: FormGroup;
   isLoading: boolean;
 
-
   constructor(private afs: AngularFirestore,
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.isLoading = true;
     this.businessId = this.route.snapshot.paramMap.get('id');
     this.businessDoc = this.afs.doc<Business>(`businesses/${this.businessId}`);
     this.business = this.businessDoc.valueChanges();
-
   }
-
 }

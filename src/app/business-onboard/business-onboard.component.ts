@@ -16,6 +16,7 @@ export class BusinessOnboardComponent implements OnInit {
   template: string;
   businessId: string;
   isReferrer: boolean;
+  userRole: string;
   businessDoc: AngularFirestoreDocument<Business>;
   business: Observable<Business>;
   businessFormGroup: FormGroup;
@@ -31,6 +32,7 @@ export class BusinessOnboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userRole = localStorage.getItem('userRole');
     this.template = this.route.snapshot.paramMap.get('template');
     this.businessId = this.route.snapshot.paramMap.get('id');
     // tslint:disable-next-line:no-string-literal
@@ -87,6 +89,11 @@ export class BusinessOnboardComponent implements OnInit {
 
       this.isLoading = false;
     });
+  }
+
+  deleteBusiness() {
+    this.businessDoc.delete();
+    this.router.navigateByUrl('/admin/businesses');
   }
 
   submit() {

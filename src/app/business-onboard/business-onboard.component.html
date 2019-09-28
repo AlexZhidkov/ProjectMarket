@@ -39,6 +39,8 @@
                         (ngModelChange)="businessDoc.update({mentor: $event})">
                 </mat-form-field>
                 <div>
+                    <button type="button" mat-raised-button color="warn" *ngIf="userRole==='admin'"
+                        (click)="deleteBusiness()">Delete</button>
                     <button type="button" mat-raised-button color="primary" matStepperNext>Next</button>
                 </div>
             </div>
