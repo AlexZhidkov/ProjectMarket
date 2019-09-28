@@ -24,10 +24,11 @@
             <h3>Activities</h3>
             <mat-divider></mat-divider>
             <mat-list>
-                <mat-list-item *ngFor="let activity of recentActivities">
+                <mat-list-item *ngFor="let appEvent of appEvents | async">
                     <mat-icon mat-list-icon>event</mat-icon>
-                    <h4 mat-line>{{activity.name}}</h4>
-                    <p mat-line> {{activity.updated | date}} </p>
+                    <h4 mat-line>{{appEvent.business.name}}</h4>
+                    <p mat-line>{{appEvent.title}}</p>
+                    <p mat-line> {{appEvent.createdOn.seconds * 1000 | date:'dd/MM/yyyy'}} </p>
                 </mat-list-item>
             </mat-list>
             <mat-divider></mat-divider>
