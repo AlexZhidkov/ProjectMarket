@@ -19,8 +19,7 @@ export class BusinessesComponent implements OnInit {
     // tslint:disable-next-line:no-string-literal
     if (this.outlet && this.outlet.activatedRouteData && this.outlet.activatedRouteData['isReferrer']) {
       this.firestore.setCollection('businesses', ref => ref
-        .where('isSubmitted', '==', true)
-        .where('createdBy.uid', '==', localStorage.getItem('uid')));
+        .where('referrer.uid', '==', localStorage.getItem('uid')));
     } else {
       this.firestore.setCollection('businesses', ref => ref
         .where('isSubmitted', '==', true));
