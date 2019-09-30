@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NamedEntity } from '../model/named-entity';
 import { Project } from '../model/project';
@@ -18,6 +18,7 @@ export class ProjectComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -72,6 +73,6 @@ export class ProjectComponent implements OnInit {
 
   deleteProject() {
     this.afs.doc<any>(`projects/${this.projectId}`).delete();
-    // ToDo navigate away from this page
+    this.router.navigateByUrl('/admin/projects');
   }
 }
