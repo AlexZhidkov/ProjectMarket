@@ -4,8 +4,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { DashboardButton } from '../dashboard-button/dashboard-button.component';
 import { AppEvent } from '../model/app-event';
-import { Business } from '../model/business';
-import { Project } from '../model/project';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
 
@@ -35,33 +33,15 @@ export class ReferrerDashboardComponent implements OnInit {
   ];
 
   isLoading = true;
-  draftBusinesses: Observable<Business[]>;
-  projects: Observable<Project[]>;
   appEvents: Observable<AppEvent[]>;
 
   constructor(private authService: AuthService,
               private afs: AngularFirestore,
               private afStorage: AngularFireStorage,
-              private businessStore: FirestoreService<Business>,
-              private projectStore: FirestoreService<Project>,
               private eventsStore: FirestoreService<AppEvent>,
   ) { }
 
   ngOnInit() {
-    this.businessStore.setCollection('businesses', ref => ref
-      .where('referrer.uid', '==', this.authService.currentUser().uid)
-      .where('submittedOn', '==', null)
-    );
-    this.draftBusinesses = this.businessStore.list();
-    this.draftBusinesses.subscribe(e => {
-      this.isLoading = false;
-    });
-
-    this.projectStore.setCollection('projects');
-    this.projects = this.projectStore.list();
-    this.projects.subscribe(e => {
-    });
-
     this.eventsStore.setCollection('events', ref => ref
       .where('referrer.uid', '==', this.authService.currentUser().uid)
       .orderBy('createdOn', 'desc')
