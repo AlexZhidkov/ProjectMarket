@@ -41,15 +41,43 @@ export class BusinessOnboardComponent implements OnInit {
       this.bindFormControls();
     } else {
       this.businessId = this.afs.createId();
-      this.afs.collection('businesses').doc(this.businessId).set({
-        why: {},
+      const newBusiness: Business = {
+        abn: null,
+        name: null,
+        address: null,
+        fteNumber: null,
+        additionalEmployees: null,
+        isMentorAvailable: false,
+        mentor: null,
+        website: null,
+        industry: null,
+        description: null,
+        supervisorRole: null,
+        supervisorExperience: null,
+        why: {
+          completeProject: false,
+          testStudent: false,
+          gainIdeas: false,
+          developMentors: false,
+          other: null
+        },
         createdBy: {
           uid: localStorage.getItem('uid'),
           name: localStorage.getItem('userName')
         },
         isSubmitted: false,
         submittedOn: null
-      }).then(_ => this.bindFormControls());
+      };
+      if (this.isReferrer) {
+        newBusiness.referrer = {
+          uid: localStorage.getItem('uid'),
+          name: localStorage.getItem('userName')
+        };
+      }
+      this.afs.collection('businesses')
+        .doc(this.businessId)
+        .set(newBusiness)
+        .then(_ => this.bindFormControls());
     }
   }
 

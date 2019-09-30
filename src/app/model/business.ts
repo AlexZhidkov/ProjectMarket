@@ -1,7 +1,8 @@
 import { BaseEntity } from './base-entity';
+import { UserShort } from './user-short';
 
 export interface Business extends BaseEntity {
-    abn?: string;
+    abn: string;
     name: string;
     template?: string;
     supervisor?: string;
@@ -24,6 +25,7 @@ export interface Business extends BaseEntity {
         developMentors: boolean;
         other: string;
     };
+    referrer?: UserShort;
     isSubmitted: boolean;
     submittedOn: Date;
 }

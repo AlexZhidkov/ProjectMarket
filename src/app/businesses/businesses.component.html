@@ -6,18 +6,8 @@
     </mat-card-header>
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
     <mat-nav-list>
-        <h2 mat-subheader>Incomplete</h2>
         <mat-list-item *ngFor="let business of businesses | async" routerLink="/business/form/{{business.id}}">
-            <mat-icon>edit</mat-icon>
-            <h3 matLine> {{business.name}} </h3>
-            <p matLine> {{business.createdBy.name}} </p>
-            <mat-divider></mat-divider>
-        </mat-list-item>
-    </mat-nav-list>
-    <mat-nav-list>
-        <h2 mat-subheader> Completed</h2>
-        <mat-list-item *ngFor="let business of businesses | async" routerLink="/business/view/{{business.id}}">
-            <mat-icon>check</mat-icon>
+            <mat-icon>{{business.isSubmitted ? "check" : "edit"}}</mat-icon>
             <h3 matLine> {{business.name}} </h3>
             <p matLine> {{business.createdBy.name}} </p>
             <mat-divider></mat-divider>

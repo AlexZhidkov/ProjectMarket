@@ -49,7 +49,7 @@ export class ReferrerDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.businessStore.setCollection('businesses', ref => ref
-      .where('createdBy.uid', '==', this.authService.currentUser().uid)
+      .where('referrer.uid', '==', this.authService.currentUser().uid)
       .where('submittedOn', '==', null)
     );
     this.draftBusinesses = this.businessStore.list();
