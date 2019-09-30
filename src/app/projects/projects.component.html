@@ -5,6 +5,9 @@
         </mat-card-title>
     </mat-card-header>
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-actions>
+        <button mat-raised-button routerLink="/admin/project">Add New Project</button>
+    </mat-card-actions>
 
     <mat-nav-list>
         <mat-list-item *ngFor="let project of projects | async" routerLink="{{project.id}}">

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NamedEntity } from '../model/named-entity';
+import { AppEvent } from '../model/app-event';
 import { Project } from '../model/project';
+import { UserShort } from '../model/user-short';
 
 @Component({
   selector: 'app-project',
@@ -53,19 +54,22 @@ export class ProjectComponent implements OnInit {
   assignBusiness(id: string) {
     this.afs.collection('businesses').doc(id).get().subscribe(businessSnapshot => {
       const business = businessSnapshot.data();
-      const assignedBusiness: NamedEntity = {
-        id,
+      const assignedBusiness: UserShort = {
+        uid: id,
         name: business.name
       };
       this.projectDoc.update({ business: assignedBusiness });
+      if (business.referrer) {
+        this.projectDoc.update({ referrer: business.referrer });
+      }
     });
   }
 
   assignStudent(id: string) {
     this.afs.collection('students').doc(id).get().subscribe(studentSnapshot => {
       const student = studentSnapshot.data();
-      const assignedStudent: NamedEntity = {
-        id,
+      const assignedStudent: UserShort = {
+        uid: id,
         name: student.name
       };
       this.projectDoc.update({ student: assignedStudent });
@@ -82,6 +86,21 @@ export class ProjectComponent implements OnInit {
         });
 
         this.projectDoc.update({ events: project.events });
+
+        const event: AppEvent = {
+          createdOn: new Date(),
+          title: projectEvent,
+          data: null,
+          user: {
+            uid: localStorage.getItem('uid'),
+            name: localStorage.getItem('userName')
+          },
+          business: project.business,
+          student: project.student,
+          referrer: project.referrer
+        };
+
+        this.afs.collection('events').add(event);
       });
   }
 
