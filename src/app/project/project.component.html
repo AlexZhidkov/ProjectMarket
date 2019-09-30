@@ -19,13 +19,19 @@
         <mat-form-field>
             <input matInput #businessId type="text" name="business" placeholder="Business ID">
             <button mat-raised-button matSuffix (click)="assignBusiness(businessId.value)">
-                Assign Business to Project
+                Assign Business
             </button>
         </mat-form-field>
         <mat-form-field>
             <input matInput #studentId type="text" name="student" placeholder="Student ID">
             <button mat-raised-button matSuffix (click)="assignStudent(studentId.value)">
-                Assign Student to Project
+                Assign Student
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput #projectEvent type="text" name="projectEvent" placeholder="Event">
+            <button mat-raised-button matSuffix (click)="addEvent(projectEvent.value)">
+                Add Event
             </button>
         </mat-form-field>
         <mat-checkbox name="isStudentAccepted" [ngModel]="(project | async)?.isStudentAccepted"

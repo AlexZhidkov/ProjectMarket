@@ -34,6 +34,7 @@ export class ProjectComponent implements OnInit {
         status: 'New project',
         business: null,
         student: null,
+        events: [],
         isStudentAccepted: false,
         isBusinessAccepted: false,
         isDocumentationCompleted: false,
@@ -69,6 +70,19 @@ export class ProjectComponent implements OnInit {
       };
       this.projectDoc.update({ student: assignedStudent });
     });
+  }
+
+  addEvent(projectEvent: string) {
+    this.projectDoc.get()
+      .subscribe(projectSnapshot => {
+        const project = projectSnapshot.data() as Project;
+        project.events.push({
+          title: projectEvent,
+          createdOn: new Date()
+        });
+
+        this.projectDoc.update({ events: project.events });
+      });
   }
 
   deleteProject() {
