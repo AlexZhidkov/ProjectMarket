@@ -50,6 +50,7 @@ import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ReferrerDashboardComponent } from './referrer-dashboard/referrer-dashboard.component';
+import { ReferrerHelpComponent } from './referrer-help/referrer-help.component';
 import { ReferrerComponent } from './referrer/referrer.component';
 import { StudentConfirmationScreenComponent } from './student-confirmation-screen/student-confirmation-screen.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
@@ -59,7 +60,6 @@ import { StudentViewComponent } from './student-view/student-view.component';
 import { StudentComponent } from './student/student.component';
 import { StudentsComponent } from './students/students.component';
 import { UsersViewerComponent } from './users-viewer/users-viewer.component';
-import { ReferrerHelpComponent } from './referrer-help/referrer-help.component';
 
 @NgModule({
   declarations: [
@@ -101,11 +101,7 @@ import { ReferrerHelpComponent } from './referrer-help/referrer-help.component';
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     AngularFireStorageModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatSidenavModule,
