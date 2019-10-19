@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { SignInProvider } from '../model/signInProviders';
 import { AuthService } from '../services/auth.service';
@@ -12,13 +13,19 @@ export class LoginComponent implements OnInit {
   provider = SignInProvider;
 
   constructor(public authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() { }
 
   login(provider: SignInProvider) {
     this.authService.login(provider)
-      .then(() => this.redirectAfterLogin());
+      .then(() => this.redirectAfterLogin())
+      .catch(err => {
+        this.snackBar.open(err.message, null, {
+          duration: 5000
+        });
+      });
   }
 
   redirectAfterLogin() {
