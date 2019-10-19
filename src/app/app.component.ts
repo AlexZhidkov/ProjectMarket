@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { Title } from '@angular/platform-browser';
+import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserProfile } from './model/user-profile';
 import { AuthService } from './services/auth.service';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
-import { APP_DATE_FORMATS, AppDateAdapter } from './shared/format-datepicker';
+import { AppDateAdapter, APP_DATE_FORMATS } from './shared/format-datepicker';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ import { APP_DATE_FORMATS, AppDateAdapter } from './shared/format-datepicker';
   ]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string;
   homeUrl: string;
   user: UserProfile;
@@ -36,6 +37,10 @@ export class AppComponent {
       this.user = user;
     }))
       .subscribe();
+  }
+
+  ngOnInit() {
+    firebase.analytics();
   }
 
   navigateHome() {
