@@ -3,11 +3,11 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /businesses/{document=**} {
     	allow read: if request.auth.uid != null;
-      allow create: if request.auth.uid != null && isBusiness();
+      allow create: if request.auth.uid != null;
       allow write: if request.auth.uid == resource.data.createdBy.uid || isAdmin();
     }
     match /events/{document=**} {
-      allow read: if isAdmin();      
+      allow read: if isAdmin() || isReferrer();      
 	    allow write: if request.auth.uid != null;
     }
     match /projects/{document=**} {
