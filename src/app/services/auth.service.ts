@@ -82,6 +82,7 @@ export class AuthService {
     this.afs.doc('users/' + authData.uid).get().subscribe(userSnapshot => {
       if (!userSnapshot.exists) {
         user.role = localStorage.getItem('newUserRole');
+        user.isFormSubmitted = false;
         localStorage.setItem('userRole', user.role);
       } else {
         localStorage.setItem('userRole', userSnapshot.data().role);

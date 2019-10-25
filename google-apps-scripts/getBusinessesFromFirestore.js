@@ -11,7 +11,7 @@ function onOpen() {
     var menuItems = [
         { name: 'Import All Businesses', functionName: 'importBusinesses' }
     ];
-    spreadsheet.addMenu('Experlio', menuItems);
+    spreadsheet.addMenu('ProjectMarket', menuItems);
 }
 
 function getBusinessesFromFirestore() {

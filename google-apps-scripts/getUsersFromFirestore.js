@@ -11,7 +11,7 @@ function onOpen() {
     var menuItems = [
         { name: 'Import All Users', functionName: 'importUsers' }
     ];
-    spreadsheet.addMenu('Experlio', menuItems);
+    spreadsheet.addMenu('ProjectMarket', menuItems);
 }
 
 function getUsersFromFirestore() {
