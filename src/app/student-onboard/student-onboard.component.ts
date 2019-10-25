@@ -38,6 +38,8 @@ export class StudentOnboardComponent implements OnInit {
   }
 
   submit() {
+    this.userDoc.update({ formSubmittedOn: new Date() });
+
     this.userDoc.get()
       .subscribe(studentSnapshot => {
         const student = studentSnapshot.data() as UserProfile;

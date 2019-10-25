@@ -10,4 +10,5 @@ export interface UserProfile extends UserShort {
     photoURL: string;
     role: 'student' | 'business' | 'referrer' | 'admin';
     student?: Student;
+    formSubmittedOn?: Date;
 }
