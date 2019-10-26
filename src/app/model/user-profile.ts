@@ -10,6 +10,6 @@ export interface UserProfile extends UserShort {
     photoURL: string;
     role: 'student' | 'business' | 'referrer' | 'admin';
     student?: Student;
-    isFormSubmitted: boolean;
-    formSubmittedOn?: Date;
+    isSubmitted: boolean;
+    submittedOn: Date;
 }
