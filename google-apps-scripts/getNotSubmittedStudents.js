@@ -19,7 +19,7 @@ function getUsersFromFirestore() {
     var key = "";
     var projectId = "";
     var firestore = FirestoreApp.getFirestore(email, key, projectId);
-    const allUsers = firestore.query("users").where("role", "==", "student").where("isFormSubmitted", "==", false).execute();
+    const allUsers = firestore.query("users").where("role", "==", "student").where("isSubmitted", "==", false).execute();
     return allUsers;
 }
 
