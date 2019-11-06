@@ -15,7 +15,7 @@ export class AuthService {
   user: Observable<UserProfile>;
 
   constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore) {
+              private afs: AngularFirestore) {
 
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -82,6 +82,9 @@ export class AuthService {
     this.afs.doc('users/' + authData.uid).get().subscribe(userSnapshot => {
       if (!userSnapshot.exists) {
         user.role = localStorage.getItem('newUserRole');
+        if (!user.role) {
+          user.role = 'student';
+        }
         user.isSubmitted = false;
         localStorage.setItem('userRole', user.role);
       } else {
